@@ -10,14 +10,14 @@ local function callback_reply(extra, success, result)
 	elseif is_admin1(result) then
 		userrank = "Admin ⭐⭐⭐"
 		send_document(org_channel_id,"./icons/3.webp", ok_cb, false)
-	elseif tonumber(result.from.id) == tonumber(gp_leader) then
+	elseif tonumber(result.from.id) == tonumber(is_owner) then
 		userrank = "Leader ⭐⭐"
 		send_document(org_channel_id,"./icons/6.webp", ok_cb, false)
 	elseif is_momod(result) then
 		userrank = "Moderator ⭐"
 		send_document(org_channel_id,"./icons/4.webp", ok_cb, false)
 	elseif tonumber(result.from.id) == tonumber(our_id) then
-		userrank = "Umbrella ⭐⭐⭐⭐⭐⭐"
+		userrank = "TeleGuard ⭐⭐⭐⭐⭐⭐"
 		send_document(org_channel_id,"./icons/9.webp", ok_cb, false)
 	elseif result.from.username then
 		if string.sub(result.from.username:lower(), -3) == "bot" then
@@ -42,48 +42,48 @@ local function callback_reply(extra, success, result)
 	if result.media then
 		if result.media.type == "document" then
 			if result.media.text then
-				msg_type = "استیکر"
+				msg_type = "Sticker"
 			else
-				msg_type = "ساير فايلها"
+				msg_type = "Other"
 			end
 		elseif result.media.type == "photo" then
-			msg_type = "فايل عکس"
+			msg_type = "Image"
 		elseif result.media.type == "video" then
-			msg_type = "فايل ويدئويي"
+			msg_type = "Video"
 		elseif result.media.type == "audio" then
-			msg_type = "فايل صوتي"
+			msg_type = "Voice"
 		elseif result.media.type == "geo" then
-			msg_type = "موقعيت مکاني"
+			msg_type = "Location"
 		elseif result.media.type == "contact" then
-			msg_type = "شماره تلفن"
+			msg_type = "Phonenumber"
 		elseif result.media.type == "file" then
-			msg_type = "فايل"
+			msg_type = "File"
 		elseif result.media.type == "webpage" then
-			msg_type = "پیش نمایش سایت"
+			msg_type = "Preview Site"
 		elseif result.media.type == "unsupported" then
-			msg_type = "فايل متحرک"
+			msg_type = "Gif"
 		else
-			msg_type = "ناشناخته"
+			msg_type = "Unknown"
 		end
 	elseif result.text then
 		if string.match(result.text, '^%d+$') then
-			msg_type = "عدد"
+			msg_type = "Number"
 		elseif string.match(result.text, '%d+') then
-			msg_type = "شامل عدد و حروف"
+			msg_type = "Number And Letters"
 		elseif string.match(result.text, '^@') then
-			msg_type = "یوزرنیم"
+			msg_type = "Username"
 		elseif string.match(result.text, '@') then
-			msg_type = "شامل یوزرنیم"
+			msg_type = "Including Username"
 		elseif string.match(result.text, '[Tt][Ee][Ll][Ee][Gg][Rr][Aa][Mm].[Mm][Ee]') then
-			msg_type = "لينک تلگرام"
+			msg_type = "Telegram Link"
 		elseif string.match(result.text, '[Hh][Tt][Tt][Pp]') then
-			msg_type = "لينک سايت"
+			msg_type = "Site Link
 		elseif string.match(result.text, '[Ww][Ww][Ww]') then
-			msg_type = "لينک سايت"
+			msg_type = "Site Link"
 		elseif string.match(result.text, '?') then
-			msg_type = "پرسش"
+			msg_type = "Question"
 		else
-			msg_type = "متن"
+			msg_type = "Text"
 		end
 	end
 	--hardware ------------------------------------------------------------------------------------------------
@@ -91,9 +91,9 @@ local function callback_reply(extra, success, result)
 		inputtext = string.sub(result.text, 0,1)
 		if result.text then
 			if string.match(inputtext, "[a|b|c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r|s|t|u|v|w|x|y|z]") then
-				hardware = "کامپیوتر"
+				hardware = "Computer"
 			elseif string.match(inputtext, "[A|B|C|D|E|F|G|H|I|J|K|L|M|N|O|P|Q|R|S|T|U|V|W|X|Y|Z]") then
-				hardware = "موبایل"
+				hardware = "Mobile"
 			else
 				hardware = "-----"
 			end
@@ -108,71 +108,70 @@ local function callback_reply(extra, success, result)
 		if result.from.phone then
 			number = "0"..string.sub(result.from.phone, 3)
 			if string.sub(result.from.phone, 0,2) == '98' then
-				number = number.."\nکشور: جمهوری اسلامی ایران"
+				number = number.."\nLocation: Iran Islamic"
 				if string.sub(result.from.phone, 0,4) == '9891' then
-					number = number.."\nنوع سیمکارت: همراه اول"
+					number = number.."\nSimcard: Hamrahaval"
 				elseif string.sub(result.from.phone, 0,5) == '98932' then
-					number = number.."\nنوع سیمکارت: تالیا"
+					number = number.."\nSimcard: Taliya"
 				elseif string.sub(result.from.phone, 0,4) == '9893' then
-					number = number.."\nنوع سیمکارت: ایرانسل"
+					number = number.."\nSimcard: MTN Irancell"
 				elseif string.sub(result.from.phone, 0,4) == '9890' then
-					number = number.."\nنوع سیمکارت: ایرانسل"
+					number = number.."\nSimcard: MTN Irancell"
 				elseif string.sub(result.from.phone, 0,4) == '9892' then
-					number = number.."\nنوع سیمکارت: رایتل"
+					number = number.."\nSimcard: Rightel"
 				else
-					number = number.."\nنوع سیمکارت: سایر"
+					number = number.."\nSimcard: Other"
 				end
 			else
-				number = number.."\nکشور: خارج\nنوع سیمکارت: متفرقه"
+				number = number.."\nLocation: Other\nSimcard: Other"
 			end
 		else
 			number = "-----"
 		end
 	elseif access == 0 then
 		if result.from.phone then
-			number = "شما مجاز نیستید"
+			number = "You Don't Have Access"
 			if string.sub(result.from.phone, 0,2) == '98' then
-				number = number.."\nکشور: جمهوری اسلامی ایران"
+				number = number.."\nLocation: Iran Islamic"
 				if string.sub(result.from.phone, 0,4) == '9891' then
-					number = number.."\nنوع سیمکارت: همراه اول"
+					number = number.."\nSimcard: Hamrahaval"
 				elseif string.sub(result.from.phone, 0,5) == '98932' then
-					number = number.."\nنوع سیمکارت: تالیا"
+					number = number.."\nSimcard: Taliya"
 				elseif string.sub(result.from.phone, 0,4) == '9893' then
-					number = number.."\nنوع سیمکارت: ایرانسل"
+					number = number.."\nSimcard: MTN Irancell"
 				elseif string.sub(result.from.phone, 0,4) == '9890' then
-					number = number.."\nنوع سیمکارت: ایرانسل"
+					number = number.."\nSimcard: MTN Irancell"
 				elseif string.sub(result.from.phone, 0,4) == '9892' then
-					number = number.."\nنوع سیمکارت: رایتل"
+					number = number.."\nSimcard: Rightel"
 				else
-					number = number.."\nنوع سیمکارت: سایر"
+					number = number.."\nSimcard: Other"
 				end
 			else
-				number = number.."\nکشور: خارج\nنوع سیمکارت: متفرقه"
+				number = number.."\nLocation: Other\nSimcard: Other"
 			end
 		else
 			number = "-----"
 		end
 	end
 	--info ------------------------------------------------------------------------------------------------
-	info = "نام کامل: "..string.gsub(result.from.print_name, "_", " ").."\n"
-	.."نام کوچک: "..(result.from.first_name or "-----").."\n"
-	.."نام خانوادگی: "..(result.from.last_name or "-----").."\n\n"
-	.."شماره موبایل: "..number.."\n"
-	.."یوزرنیم: @"..(result.from.username or "-----").."\n"
-	.."آی دی: "..result.from.id.."\n\n"
-	.."مقام: "..usertype.."\n"
-	.."جایگاه: "..userrank.."\n\n"
-	.."رابط کاربری: "..hardware.."\n"
-	.."تعداد پیامها: "..user_info.msgs.."\n"
-	.."نوع پیام: "..msg_type.."\n\n"
-	.."نام گروه: "..string.gsub(result.to.print_name, "_", " ").."\n"
-	.."آی دی گروه: "..result.to.id
+	info = "#Fullname: "..string.gsub(result.from.print_name, "_", " ").."\n"
+	.."#Firstname: "..(result.from.first_name or "").."\n"
+	.."#Lastname: "..(result.from.last_name or "").."\n\n"
+	.."#Phonenumber: "..number.."\n"
+	.."#Username: Telegram.me/"..(result.from.username or "").."\n"
+	.."#ID: "..result.from.id.."\n\n"
+	.."#Position: "..userrank.."\n\n"
+	.."#Interface: "..hardware.."\n"
+	.."#Total Messages: "..user_info.msgs.."\n"
+	.."#Type Of Message: "..msg_type.."\n\n"
+	.."#SuperGroup Name: "..string.gsub(result.to.print_name, "_", " ").."\n"
+	.."SuperGroup ID: "..result.to.id
 	send_large_msg(org_channel_id, info)
 end
 
 local function callback_res(extra, success, result)
 	if success == 0 then
-		return send_large_msg(org_channel_id, "یوزرنیم وارد شده اشتباه است")
+		return send_large_msg(org_channel_id, "Username Not Found")
 	end
 	--icon & rank ------------------------------------------------------------------------------------------------
 	if tonumber(result.id) == 48167877 then
@@ -184,14 +183,14 @@ local function callback_res(extra, success, result)
 	elseif is_admin1(result) then
 		userrank = "Admin ⭐⭐⭐"
 		send_document(org_channel_id,"./icons/3.webp", ok_cb, false)
-	elseif tonumber(result.id) == tonumber(gp_leader) then
-		userrank = "Leader ⭐⭐"
+	elseif tonumber(result.id) == tonumber(is_owner) then
+		userrank = "Owner ⭐⭐"
 		send_document(org_channel_id,"./icons/6.webp", ok_cb, false)
 	elseif is_momod(result) then
-		userrank = "Moderator ⭐"
+		userrank = "Leader ⭐"
 		send_document(org_channel_id,"./icons/4.webp", ok_cb, false)
 	elseif tonumber(result.id) == tonumber(our_id) then
-		userrank = "Umbrella ⭐⭐⭐⭐⭐⭐"
+		userrank = "TeleGuard ⭐⭐⭐⭐⭐⭐"
 		send_document(org_channel_id,"./icons/9.webp", ok_cb, false)
 	elseif string.sub(result.username:lower(), -3) == 'bot' then
 		userrank = "API Bot"
@@ -208,69 +207,73 @@ local function callback_res(extra, success, result)
 	end
 	--phone ------------------------------------------------------------------------------------------------
 	if access == 1 then
-		if result.phone then
-			number = "0"..string.sub(result.phone, 3)
-			if string.sub(result.phone, 0,2) == '98' then
-				number = number.."\nکشور: جمهوری اسلامی ایران"
-				if string.sub(result.phone, 0,4) == '9891' then
-					number = number.."\nنوع سیمکارت: همراه اول"
-				elseif string.sub(result.phone, 0,5) == '98932' then
-					number = number.."\nنوع سیمکارت: تالیا"
-				elseif string.sub(result.phone, 0,4) == '9893' then
-					number = number.."\nنوع سیمکارت: ایرانسل"
-				elseif string.sub(result.phone, 0,4) == '9890' then
-					number = number.."\nنوع سیمکارت: ایرانسل"
-				elseif string.sub(result.phone, 0,4) == '9892' then
-					number = number.."\nنوع سیمکارت: رایتل"
+		if result.from.phone then
+			number = "0"..string.sub(result.from.phone, 3)
+			if string.sub(result.from.phone, 0,2) == '98' then
+				number = number.."\nLocation: Iran Islamic"
+				if string.sub(result.from.phone, 0,4) == '9891' then
+					number = number.."\nSimcard: Hamrahaval"
+				elseif string.sub(result.from.phone, 0,5) == '98932' then
+					number = number.."\nSimcard: Taliya"
+				elseif string.sub(result.from.phone, 0,4) == '9893' then
+					number = number.."\nSimcard: MTN Irancell"
+				elseif string.sub(result.from.phone, 0,4) == '9890' then
+					number = number.."\nSimcard: MTN Irancell"
+				elseif string.sub(result.from.phone, 0,4) == '9892' then
+					number = number.."\nSimcard: Rightel"
 				else
-					number = number.."\nنوع سیمکارت: سایر"
+					number = number.."\nSimcard: Other"
 				end
 			else
-				number = number.."\nکشور: خارج\nنوع سیمکارت: متفرقه"
+				number = number.."\nLocation: Other\nSimcard: Other"
 			end
 		else
 			number = "-----"
 		end
 	elseif access == 0 then
-		if result.phone then
-			number = "شما مجاز نیستید"
-			if string.sub(result.phone, 0,2) == '98' then
-				number = number.."\nکشور: جمهوری اسلامی ایران"
-				if string.sub(result.phone, 0,4) == '9891' then
-					number = number.."\nنوع سیمکارت: همراه اول"
-				elseif string.sub(result.phone, 0,5) == '98932' then
-					number = number.."\nنوع سیمکارت: تالیا"
-				elseif string.sub(result.phone, 0,4) == '9893' then
-					number = number.."\nنوع سیمکارت: ایرانسل"
-				elseif string.sub(result.phone, 0,4) == '9890' then
-					number = number.."\nنوع سیمکارت: ایرانسل"
-				elseif string.sub(result.phone, 0,4) == '9892' then
-					number = number.."\nنوع سیمکارت: رایتل"
+		if result.from.phone then
+			number = "You Don't Have Access"
+			if string.sub(result.from.phone, 0,2) == '98' then
+				number = number.."\nLocation: Iran Islamic"
+				if string.sub(result.from.phone, 0,4) == '9891' then
+					number = number.."\nSimcard: Hamrahaval"
+				elseif string.sub(result.from.phone, 0,5) == '98932' then
+					number = number.."\nSimcard: Taliya"
+				elseif string.sub(result.from.phone, 0,4) == '9893' then
+					number = number.."\nSimcard: MTN Irancell"
+				elseif string.sub(result.from.phone, 0,4) == '9890' then
+					number = number.."\nSimcard: MTN Irancell"
+				elseif string.sub(result.from.phone, 0,4) == '9892' then
+					number = number.."\nSimcard: Rightel"
 				else
-					number = number.."\nنوع سیمکارت: سایر"
+					number = number.."\nSimcard: Other"
 				end
 			else
-				number = number.."\nکشور: خارج\nنوع سیمکارت: متفرقه"
+				number = number.."\nLocation: Other\nSimcard: Other"
 			end
 		else
 			number = "-----"
 		end
 	end
 	--info ------------------------------------------------------------------------------------------------
-	info = "نام کامل: "..string.gsub(result.print_name, "_", " ").."\n"
-	.."نام کوچک: "..(result.first_name or "-----").."\n"
-	.."نام خانوادگی: "..(result.last_name or "-----").."\n\n"
-	.."شماره موبایل: "..number.."\n"
-	.."یوزرنیم: @"..(result.username or "-----").."\n"
-	.."آی دی: "..result.id.."\n\n"
-	.."مقام: "..usertype.."\n"
-	.."جایگاه: "..userrank.."\n\n"
+	info = "#Fullname: "..string.gsub(result.from.print_name, "_", " ").."\n"
+	.."#Firstname: "..(result.from.first_name or "").."\n"
+	.."#Lastname: "..(result.from.last_name or "").."\n\n"
+	.."#Phonenumber: "..number.."\n"
+	.."#Username: Telegram.me/"..(result.from.username or "").."\n"
+	.."#ID: "..result.from.id.."\n\n"
+	.."#Position: "..userrank.."\n\n"
+	.."#Interface: "..hardware.."\n"
+	.."#Total Messages: "..user_info.msgs.."\n"
+	.."#Type Of Message: "..msg_type.."\n\n"
+	.."#SuperGroup Name: "..string.gsub(result.to.print_name, "_", " ").."\n"
+	.."SuperGroup ID: "..result.to.id
 	send_large_msg(org_channel_id, info)
 end
 
-local function callback_info(extra, success, result)
+local function callback_res(extra, success, result)
 	if success == 0 then
-		return send_large_msg(org_channel_id, "آی دی وارد شده اشتباه است")
+		return send_large_msg(org_channel_id, "Username Not Found")
 	end
 	--icon & rank ------------------------------------------------------------------------------------------------
 	if tonumber(result.id) == 48167877 then
@@ -282,14 +285,14 @@ local function callback_info(extra, success, result)
 	elseif is_admin1(result) then
 		userrank = "Admin ⭐⭐⭐"
 		send_document(org_channel_id,"./icons/3.webp", ok_cb, false)
-	elseif tonumber(result.id) == tonumber(gp_leader) then
+	elseif tonumber(result.id) == tonumber(is_owner) then
 		userrank = "Leader ⭐⭐"
 		send_document(org_channel_id,"./icons/6.webp", ok_cb, false)
 	elseif is_momod(result) then
 		userrank = "Moderator ⭐"
 		send_document(org_channel_id,"./icons/4.webp", ok_cb, false)
 	elseif tonumber(result.id) == tonumber(our_id) then
-		userrank = "Umbrella ⭐⭐⭐⭐⭐⭐"
+		userrank = "TeleGuard ⭐⭐⭐⭐⭐⭐"
 		send_document(org_channel_id,"./icons/9.webp", ok_cb, false)
 	elseif string.sub(result.username:lower(), -3) == 'bot' then
 		userrank = "API Bot"
@@ -306,49 +309,49 @@ local function callback_info(extra, success, result)
 	end
 	--phone ------------------------------------------------------------------------------------------------
 	if access == 1 then
-		if result.phone then
-			number = "0"..string.sub(result.phone, 3)
-			if string.sub(result.phone, 0,2) == '98' then
-				number = number.."\nکشور: جمهوری اسلامی ایران"
-				if string.sub(result.phone, 0,4) == '9891' then
-					number = number.."\nنوع سیمکارت: همراه اول"
-				elseif string.sub(result.phone, 0,5) == '98932' then
-					number = number.."\nنوع سیمکارت: تالیا"
-				elseif string.sub(result.phone, 0,4) == '9893' then
-					number = number.."\nنوع سیمکارت: ایرانسل"
-				elseif string.sub(result.phone, 0,4) == '9890' then
-					number = number.."\nنوع سیمکارت: ایرانسل"
-				elseif string.sub(result.phone, 0,4) == '9892' then
-					number = number.."\nنوع سیمکارت: رایتل"
+		if result.from.phone then
+			number = "0"..string.sub(result.from.phone, 3)
+			if string.sub(result.from.phone, 0,2) == '98' then
+				number = number.."\nLocation: Iran Islamic"
+				if string.sub(result.from.phone, 0,4) == '9891' then
+					number = number.."\nSimcard: Hamrahaval"
+				elseif string.sub(result.from.phone, 0,5) == '98932' then
+					number = number.."\nSimcard: Taliya"
+				elseif string.sub(result.from.phone, 0,4) == '9893' then
+					number = number.."\nSimcard: MTN Irancell"
+				elseif string.sub(result.from.phone, 0,4) == '9890' then
+					number = number.."\nSimcard: MTN Irancell"
+				elseif string.sub(result.from.phone, 0,4) == '9892' then
+					number = number.."\nSimcard: Rightel"
 				else
-					number = number.."\nنوع سیمکارت: سایر"
+					number = number.."\nSimcard: Other"
 				end
 			else
-				number = number.."\nکشور: خارج\nنوع سیمکارت: متفرقه"
+				number = number.."\nLocation: Other\nSimcard: Other"
 			end
 		else
 			number = "-----"
 		end
 	elseif access == 0 then
-		if result.phone then
-			number = "شما مجاز نیستید"
-			if string.sub(result.phone, 0,2) == '98' then
-				number = number.."\nکشور: جمهوری اسلامی ایران"
-				if string.sub(result.phone, 0,4) == '9891' then
-					number = number.."\nنوع سیمکارت: همراه اول"
-				elseif string.sub(result.phone, 0,5) == '98932' then
-					number = number.."\nنوع سیمکارت: تالیا"
-				elseif string.sub(result.phone, 0,4) == '9893' then
-					number = number.."\nنوع سیمکارت: ایرانسل"
-				elseif string.sub(result.phone, 0,4) == '9890' then
-					number = number.."\nنوع سیمکارت: ایرانسل"
-				elseif string.sub(result.phone, 0,4) == '9892' then
-					number = number.."\nنوع سیمکارت: رایتل"
+		if result.from.phone then
+			number = "You Don't Have Access"
+			if string.sub(result.from.phone, 0,2) == '98' then
+				number = number.."\nLocation: Iran Islamic"
+				if string.sub(result.from.phone, 0,4) == '9891' then
+					number = number.."\nSimcard: Hamrahaval"
+				elseif string.sub(result.from.phone, 0,5) == '98932' then
+					number = number.."\nSimcard: Taliya"
+				elseif string.sub(result.from.phone, 0,4) == '9893' then
+					number = number.."\nSimcard: MTN Irancell"
+				elseif string.sub(result.from.phone, 0,4) == '9890' then
+					number = number.."\nSimcard: MTN Irancell"
+				elseif string.sub(result.from.phone, 0,4) == '9892' then
+					number = number.."\nSimcard: Rightel"
 				else
-					number = number.."\nنوع سیمکارت: سایر"
+					number = number.."\nSimcard: Other"
 				end
 			else
-				number = number.."\nکشور: خارج\nنوع سیمکارت: متفرقه"
+				number = number.."\nLocation: Other\nSimcard: Other"
 			end
 		else
 			number = "-----"
@@ -379,29 +382,33 @@ local function callback_info(extra, success, result)
 		lastname = "-----"
 	end
 	--info ------------------------------------------------------------------------------------------------
-	info = "نام کامل: "..string.gsub(result.print_name, "_", " ").."\n"
-	.."نام کوچک: "..(result.first_name or "-----").."\n"
-	.."نام خانوادگی: "..(result.last_name or "-----").."\n\n"
-	.."شماره موبایل: "..number.."\n"
-	.."یوزرنیم: @"..(result.username or "-----").."\n"
-	.."آی دی: "..result.id.."\n\n"
-	.."مقام: "..usertype.."\n"
-	.."جایگاه: "..userrank.."\n\n"
+	info = "#Fullname: "..string.gsub(result.from.print_name, "_", " ").."\n"
+	.."#Firstname: "..(result.from.first_name or "").."\n"
+	.."#Lastname: "..(result.from.last_name or "").."\n\n"
+	.."#Phonenumber: "..number.."\n"
+	.."#Username: Telegram.me/"..(result.from.username or "").."\n"
+	.."#ID: "..result.from.id.."\n\n"
+	.."#Position: "..userrank.."\n\n"
+	.."#Interface: "..hardware.."\n"
+	.."#Total Messages: "..user_info.msgs.."\n"
+	.."#Type Of Message: "..msg_type.."\n\n"
+	.."#SuperGroup Name: "..string.gsub(result.to.print_name, "_", " ").."\n"
+	.."SuperGroup ID: "..result.to.id
 	send_large_msg(org_channel_id, info)
 end
 
 local function run(msg, matches)
 	local data = load_data(_config.moderation.data)
-	gp_leader = data[tostring(msg.to.id)]['settings']['gp_leader']
+	is_owner = data[tostring(msg.to.id)]['settings']['is_owner']
 	org_channel_id = "channel#id"..msg.to.id
 	if is_sudo(msg) then
 		access = 1
 	else
 		access = 0
 	end
-	if matches[1] == '/infodel' and is_sudo(msg) then
+	if matches[1] == 'infodel' and is_sudo(msg) then
 		azlemagham = io.popen('rm ./info/'..matches[2]..'.txt'):read('*all')
-		return 'از مقام خود عزل شد'
+		return 'Was Removed From His Position'
 	elseif matches[1] == '/info' and is_sudo(msg) then
 		local name = string.sub(matches[2], 1, 50)
 		local text = string.sub(matches[3], 1, 10000000000)
@@ -409,7 +416,7 @@ local function run(msg, matches)
 		file:write(text)
 		file:flush()
 		file:close() 
-		return "مقام ثبت شد"
+		return "New Rank Seted"
 	elseif #matches == 2 then
 		local cbres_extra = {channelid = msg.to.id}
 		if string.match(matches[2], '^%d+$') then
@@ -426,10 +433,10 @@ local function run(msg, matches)
 			usertype = "-----"
 		end
 		--hardware ------------------------------------------------------------------------------------------------
-		if matches[1] == "info" then
-			hardware = "کامپیوتر"
+		if matches[1] == "myinfo" then
+			hardware = "Computer"
 		else
-			hardware = "موبایل"
+			hardware = "Mobile"
 		end
 		if not msg.reply_id then
 			--contor ------------------------------------------------------------------------------------------------
@@ -448,7 +455,7 @@ local function run(msg, matches)
 			elseif is_admin1(msg) then
 				userrank = "Admin ⭐⭐⭐"
 				send_document("channel#id"..msg.to.id,"./icons/3.webp", ok_cb, false)
-			elseif tonumber(msg.from.id) == tonumber(gp_leader) then
+			elseif tonumber(msg.from.id) == tonumber(is_owner) then
 				userrank = "Leader ⭐⭐"
 				send_document("channel#id"..msg.to.id,"./icons/6.webp", ok_cb, false)
 			elseif is_momod(msg) then
@@ -461,40 +468,42 @@ local function run(msg, matches)
 			if msg.from.phone then
 				numberorg = string.sub(msg.from.phone, 3)
 				number = "****0"..string.sub(numberorg, 0,6)
-				if string.sub(msg.from.phone, 0,2) == '98' then
-					number = number.."\nکشور: جمهوری اسلامی ایران"
-					if string.sub(msg.from.phone, 0,4) == '9891' then
-						number = number.."\nنوع سیمکارت: همراه اول"
-					elseif string.sub(msg.from.phone, 0,5) == '98932' then
-						number = number.."\nنوع سیمکارت: تالیا"
-					elseif string.sub(msg.from.phone, 0,4) == '9893' then
-						number = number.."\nنوع سیمکارت: ایرانسل"
-					elseif string.sub(msg.from.phone, 0,4) == '9890' then
-						number = number.."\nنوع سیمکارت: ایرانسل"
-					elseif string.sub(msg.from.phone, 0,4) == '9892' then
-						number = number.."\nنوع سیمکارت: رایتل"
-					else
-						number = number.."\nنوع سیمکارت: سایر"
-					end
+				if string.sub(result.from.phone, 0,2) == '98' then
+				number = number.."\nLocation: Iran Islamic"
+				if string.sub(result.from.phone, 0,4) == '9891' then
+					number = number.."\nSimcard: Hamrahaval"
+				elseif string.sub(result.from.phone, 0,5) == '98932' then
+					number = number.."\nSimcard: Taliya"
+				elseif string.sub(result.from.phone, 0,4) == '9893' then
+					number = number.."\nSimcard: MTN Irancell"
+				elseif string.sub(result.from.phone, 0,4) == '9890' then
+					number = number.."\nSimcard: MTN Irancell"
+				elseif string.sub(result.from.phone, 0,4) == '9892' then
+					number = number.."\nSimcard: Rightel"
 				else
-					number = number.."\nکشور: خارج\nنوع سیمکارت: متفرقه"
+					number = number.."\nSimcard: Other"
+				end
+			else
+				number = number.."\nLocation: Other\nSimcard: Other"
 				end
 			else
 				number = "-----"
 			end
 			--info ------------------------------------------------------------------------------------------------
-			local info = "نام کامل: "..string.gsub(msg.from.print_name, "_", " ").."\n"
-					.."نام کوچک: "..(msg.from.first_name or "-----").."\n"
-					.."نام خانوادگی: "..(msg.from.last_name or "-----").."\n\n"
-					.."شماره موبایل: "..number.."\n"
-					.."یوزرنیم: @"..(msg.from.username or "-----").."\n"
-					.."آی دی: "..msg.from.id.."\n\n"
-					.."مقام: "..usertype.."\n"
-					.."جایگاه: "..userrank.."\n\n"
-					.."رابط کاربری: "..hardware.."\n"
-					.."تعداد پیامها: "..user_info.msgs.."\n\n"
-					.."نام گروه: "..string.gsub(msg.to.print_name, "_", " ").."\n"
-					.."آی دی گروه: "..msg.to.id
+				local info = "#Fullname: "..string.gsub(result.from.print_name, "_", " ").."\n"
+				.."#Firstname: "..(result.from.first_name or "").."\n"
+				.."#Lastname: "..(result.from.last_name or "").."\n\n"
+				.."#Phonenumber: "..number.."\n"
+				.."#Username: Telegram.me/"..(result.from.username or "").."\n"
+				.."#ID: "..result.from.id.."\n\n"
+				.."#Position: "..userrank.."\n\n"
+				.."#Interface: "..hardware.."\n"
+				.."#Total Messages: "..user_info.msgs.."\n"
+				.."#Type Of Message: "..msg_type.."\n\n"
+				.."#SuperGroup Name: "..string.gsub(result.to.print_name, "_", " ").."\n"
+				.."SuperGroup ID: "..result.to.id
+	send_large_msg(org_channel_id, info)
+end
 			return info
 		else
 			get_message(msg.reply_id, callback_reply, false)
@@ -518,11 +527,11 @@ return {
 			},
 		},
 	patterns = {
-		"^(/infodel) (.*)$",
-		"^(/info) ([^%s]+) (.*)$",
-		"^([Ii]nfo) (.*)$",
-		"^(info)$",
-		"^(Info)$",
+		"^[!/#]infodel (.*)$",
+		"^[!/#]info ([^%s]+) (.*)$",
+		"^[!/#]info (.*)$",
+		"^[!#/]myinfo$",
+		"^[!#/]myinfo$",
 	},
 	run = run,
 }
