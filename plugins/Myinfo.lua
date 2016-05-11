@@ -468,17 +468,17 @@ local function run(msg, matches)
 			if msg.from.phone then
 				numberorg = string.sub(msg.from.phone, 3)
 				number = "****0"..string.sub(numberorg, 0,6)
-				if string.sub(result.from.phone, 0,2) == '98' then
+				if string.sub(msg.from.phone, 0,2) == '98' then
 				number = number.."\nLocation: Iran Islamic"
-				if string.sub(result.from.phone, 0,4) == '9891' then
+				if string.sub(msg.from.phone, 0,4) == '9891' then
 					number = number.."\nSimcard: Hamrahaval"
-				elseif string.sub(result.from.phone, 0,5) == '98932' then
+				elseif string.sub(msg.from.phone, 0,5) == '98932' then
 					number = number.."\nSimcard: Taliya"
-				elseif string.sub(result.from.phone, 0,4) == '9893' then
+				elseif string.sub(msg.from.phone, 0,4) == '9893' then
 					number = number.."\nSimcard: MTN Irancell"
-				elseif string.sub(result.from.phone, 0,4) == '9890' then
+				elseif string.sub(msg.from.phone, 0,4) == '9890' then
 					number = number.."\nSimcard: MTN Irancell"
-				elseif string.sub(result.from.phone, 0,4) == '9892' then
+				elseif string.sub(msg.from.phone, 0,4) == '9892' then
 					number = number.."\nSimcard: Rightel"
 				else
 					number = number.."\nSimcard: Other"
@@ -491,17 +491,17 @@ local function run(msg, matches)
 			end
 			--info ------------------------------------------------------------------------------------------------
 				local info = "#Fullname: "..string.gsub(result.from.print_name, "_", " ").."\n"
-				.."#Firstname: "..(result.from.first_name or "").."\n"
-				.."#Lastname: "..(result.from.last_name or "").."\n\n"
+				.."#Firstname: "..(msg.from.first_name or "").."\n"
+				.."#Lastname: "..(msg.from.last_name or "").."\n\n"
 				.."#Phonenumber: "..number.."\n"
-				.."#Username: Telegram.me/"..(result.from.username or "").."\n"
-				.."#ID: "..result.from.id.."\n\n"
+				.."#Username: Telegram.me/"..(msg.from.username or "").."\n"
+				.."#ID: "..msg.from.id.."\n\n"
 				.."#Position: "..userrank.."\n\n"
 				.."#Interface: "..hardware.."\n"
 				.."#Total Messages: "..user_info.msgs.."\n"
 				.."#Type Of Message: "..msg_type.."\n\n"
-				.."#SuperGroup Name: "..string.gsub(result.to.print_name, "_", " ").."\n"
-				.."SuperGroup ID: "..result.to.id
+				.."#SuperGroup Name: "..string.gsub(msg.to.print_name, "_", " ").."\n"
+				.."SuperGroup ID: "...msg.to.id
 	send_large_msg(org_channel_id, info)
 			return info
 		else
