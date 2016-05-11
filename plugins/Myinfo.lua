@@ -491,7 +491,7 @@ local function run(msg, matches)
 				.."#Total Messages: "..user_info.msgs.."\n"
 				.."#Type Of Message: "..msg_type.."\n\n"
 				.."#SuperGroup Name: "..string.gsub(msg.to.print_name, "_", " ").."\n"
-				.."SuperGroup ID: "..msg.to.id
+				.."#SuperGroup ID: "..msg.to.id
 	send_large_msg(org_channel_id, info)
 			return info
 		else
