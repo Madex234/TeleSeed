@@ -1850,7 +1850,7 @@ if matches[2] == "bots" and is_momod(msg) then
 			end
 			if matches[2] == 'poker' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked poker ")
-				return lock_group_poker(msg, data, target)
+				return unlock_group_poker(msg, data, target)
 			end
 			if matches[2] == 'contacts' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked contact posting")
