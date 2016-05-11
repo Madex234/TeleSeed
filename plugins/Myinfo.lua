@@ -77,7 +77,7 @@ local function callback_reply(extra, success, result)
 		elseif string.match(result.text, '[Tt][Ee][Ll][Ee][Gg][Rr][Aa][Mm].[Mm][Ee]') then
 			msg_type = "Telegram Link"
 		elseif string.match(result.text, '[Hh][Tt][Tt][Pp]') then
-			msg_type = "Site Link
+			msg_type = "Site Link"
 		elseif string.match(result.text, '[Ww][Ww][Ww]') then
 			msg_type = "Site Link"
 		elseif string.match(result.text, '?') then
