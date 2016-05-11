@@ -74,6 +74,7 @@ do local _ = {
     "Text_To_Voice_Fa",
     "Time",
     "Translate",
+    "Update",
     "Version",
     "Weather",
     "White_List"
