@@ -503,7 +503,6 @@ local function run(msg, matches)
 				.."#SuperGroup Name: "..string.gsub(result.to.print_name, "_", " ").."\n"
 				.."SuperGroup ID: "..result.to.id
 	send_large_msg(org_channel_id, info)
-end
 			return info
 		else
 			get_message(msg.reply_id, callback_reply, false)
