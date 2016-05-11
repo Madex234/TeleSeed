@@ -256,19 +256,14 @@ local function callback_res(extra, success, result)
 		end
 	end
 	--info ------------------------------------------------------------------------------------------------
-	info = "#Fullname: "..string.gsub(result.from.print_name, "_", " ").."\n"
-	.."#Firstname: "..(result.from.first_name or "").."\n"
-	.."#Lastname: "..(result.from.last_name or "").."\n\n"
-	.."#Phonenumber: "..number.."\n"
-	.."#Username: Telegram.me/"..(result.from.username or "").."\n"
-	.."#ID: "..result.from.id.."\n\n"
+	info = "#Fullname: "..string.gsub(result.print_name, "_", " ").."\n"
+	.."#Firstname: "..(result.first_name or "-----").."\n"
+	.."#Lastname: "..(result.last_name or "-----").."\n\n"
+	.."Phonenumber: "..number.."\n"
+	.."#Username: Telegram.me/"..(result.username or "-----").."\n"
+	.."#ID: "..result.id.."\n\n"
 	.."#Position: "..userrank.."\n\n"
-	.."#Interface: "..hardware.."\n"
-	.."#Total Messages: "..user_info.msgs.."\n"
-	.."#Type Of Message: "..msg_type.."\n\n"
-	.."#SuperGroup Name: "..string.gsub(result.to.print_name, "_", " ").."\n"
-	.."SuperGroup ID: "..result.to.id
-	send_large_msg(org_channel_id, info)
+	send_large_msg(org_chat_id, info)
 end
 
 local function callback_res(extra, success, result)
@@ -382,19 +377,14 @@ local function callback_res(extra, success, result)
 		lastname = "-----"
 	end
 	--info ------------------------------------------------------------------------------------------------
-	info = "#Fullname: "..string.gsub(result.from.print_name, "_", " ").."\n"
-	.."#Firstname: "..(result.from.first_name or "").."\n"
-	.."#Lastname: "..(result.from.last_name or "").."\n\n"
+	info = "#Fullname: "..string.gsub(result.print_name, "_", " ").."\n"
+	.."#Firstname: "..(result.first_name or "-----").."\n"
+	.."#Lastname: "..(result.last_name or "-----").."\n\n"
 	.."#Phonenumber: "..number.."\n"
-	.."#Username: Telegram.me/"..(result.from.username or "").."\n"
-	.."#ID: "..result.from.id.."\n\n"
+	.."#Username: Telegram.me/"..(result.username or "-----").."\n"
+	.."#ID: "..result.id.."\n\n"
 	.."#Position: "..userrank.."\n\n"
-	.."#Interface: "..hardware.."\n"
-	.."#Total Messages: "..user_info.msgs.."\n"
-	.."#Type Of Message: "..msg_type.."\n\n"
-	.."#SuperGroup Name: "..string.gsub(result.to.print_name, "_", " ").."\n"
-	.."SuperGroup ID: "..result.to.id
-	send_large_msg(org_channel_id, info)
+	send_large_msg(org_chat_id, info)
 end
 
 local function run(msg, matches)
