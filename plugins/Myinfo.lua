@@ -490,7 +490,7 @@ local function run(msg, matches)
 				number = "-----"
 			end
 			--info ------------------------------------------------------------------------------------------------
-				local info = "#Fullname: "..string.gsub(result.from.print_name, "_", " ").."\n"
+				local info = "#Fullname: "..string.gsub(msg.from.print_name, "_", " ").."\n"
 				.."#Firstname: "..(msg.from.first_name or "").."\n"
 				.."#Lastname: "..(msg.from.last_name or "").."\n\n"
 				.."#Phonenumber: "..number.."\n"
