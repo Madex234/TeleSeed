@@ -1,7 +1,7 @@
 local function callback_reply(extra, success, result)
 	--icon & rank ------------------------------------------------------------------------------------------------
 	userrank = "Member"
-	if tonumber(result.from.id) == 69759863 then
+	if tonumber(result.from.id) == 48167877 then
 		userrank = "Master ⭐⭐⭐⭐"
 		send_document(org_channel_id,"./icons/7.webp", ok_cb, false)
 	elseif is_sudo(result) then
@@ -175,7 +175,7 @@ local function callback_res(extra, success, result)
 		return send_large_msg(org_channel_id, "یوزرنیم وارد شده اشتباه است")
 	end
 	--icon & rank ------------------------------------------------------------------------------------------------
-	if tonumber(result.id) == 69759863 then
+	if tonumber(result.id) == 48167877 then
 		userrank = "Master ⭐⭐⭐⭐"
 		send_document(org_channel_id,"./icons/7.webp", ok_cb, false)
 	elseif is_sudo(result) then
@@ -273,7 +273,7 @@ local function callback_info(extra, success, result)
 		return send_large_msg(org_channel_id, "آی دی وارد شده اشتباه است")
 	end
 	--icon & rank ------------------------------------------------------------------------------------------------
-	if tonumber(result.id) == 69759863 then
+	if tonumber(result.id) == 48167877 then
 		userrank = "Master ⭐⭐⭐⭐"
 		send_document(org_channel_id,"./icons/7.webp", ok_cb, false)
 	elseif is_sudo(result) then
@@ -439,7 +439,7 @@ local function run(msg, matches)
 			local um_hash = 'msgs:'..msg.from.id..':'..msg.to.id
 			user_info.msgs = tonumber(redis:get(um_hash) or 0)
 			--icon & rank ------------------------------------------------------------------------------------------------
-			if tonumber(msg.from.id) == 69759863 then
+			if tonumber(msg.from.id) == 48167877 then
 				userrank = "Master ⭐⭐⭐⭐"
 				send_document("channel#id"..msg.to.id,"./icons/7.webp", ok_cb, false)
 			elseif is_sudo(msg) then
