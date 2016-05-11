@@ -46,6 +46,7 @@ do local _ = {
     "Make_File",
     "Msg_Checks",
     "Music",
+    "Myinfo",
     "Onservice",
     "Owners",
     "Plugins",
