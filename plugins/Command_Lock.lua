@@ -17,7 +17,8 @@ if msg.to.type == 'channel' then
 		delete_msg(msg.id, ok_cb, true)
     end
 end
- end
+end
+return {
 patterns = {
     "id",
     "help",
