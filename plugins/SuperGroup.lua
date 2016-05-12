@@ -552,6 +552,34 @@ local function unlock_group_poker(msg, data, target)
     return 'Pokerface posting has been unlocked'
   end
 end
+
+local function lock_group_cmd(msg, data, target)
+  if not is_momod(msg) then
+    return
+  end
+  local group_cmd_lock = data[tostring(target)]['settings']['lock_cmd']
+  if group_cmd_lock == 'yes' then
+    return 'Command posting is already locked'
+  else
+    data[tostring(target)]['settings']['lock_cmd'] = 'yes'
+    save_data(_config.moderation.data, data)
+    return 'Command posting has been locked'
+  end
+end
+
+local function unlock_group_cmd(msg, data, target)
+  if not is_momod(msg) then
+    return
+  end
+  local group_cmd_lock = data[tostring(target)]['settings']['lock_cmd']
+  if group_poker_cmd == 'no' then
+    return 'Command posting is already unlocked'
+  else
+    data[tostring(target)]['settings']['lock_cmd'] = 'no'
+    save_data(_config.moderation.data, data)
+    return 'Command posting has been unlocked'
+  end
+end
 --End supergroup locks
 
 --'Set supergroup rules' function
