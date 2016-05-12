@@ -568,7 +568,7 @@ local function lock_group_cmd(msg, data, target)
   end
 end
 
-local function unlock_group_cmd(msg, data, target)
+local function unlock_group_poker(msg, data, target)
   if not is_momod(msg) then
     return
   end
@@ -581,6 +581,7 @@ local function unlock_group_cmd(msg, data, target)
     return 'Command posting has been unlocked'
   end
 end
+
 --End supergroup locks
 
 --'Set supergroup rules' function
