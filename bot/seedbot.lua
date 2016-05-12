@@ -227,6 +227,7 @@ function create_config( )
     "ClashofClans",
     "Command_Lock",
     "Connect_Server",
+    "Date",
     "CPU",
     "Dogify",
     "English_Lock",
