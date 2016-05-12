@@ -573,7 +573,7 @@ local function unlock_group_cmd(msg, data, target)
     return
   end
   local group_cmd_lock = data[tostring(target)]['settings']['lock_cmd']
-  if group_poker_cmd == 'no' then
+  if group_cmd_lock == 'no' then
     return 'Command posting is already unlocked'
   else
     data[tostring(target)]['settings']['lock_cmd'] = 'no'
