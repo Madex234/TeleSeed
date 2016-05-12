@@ -28,7 +28,8 @@ return {
 	},
   patterns = {
     "@",
-	"#"
+    "^@[%a%d]",
+    "#"
   },
   run = run
 }
