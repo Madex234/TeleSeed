@@ -222,6 +222,7 @@ function create_config( )
     "Azan",
     "Banhammer",
     "Banner",
+    "Bots_Lock",
     "Broadcast",
     "CPU",
     "Calculator",
