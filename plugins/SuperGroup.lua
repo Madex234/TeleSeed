@@ -583,13 +583,17 @@ local function unlock_group_cmd(msg, data, target)
   end
 end
 
+local function lock_group_reply(msg, data, target)
+  if not is_momod(msg) then
+    return
+  end
   local group_reply_lock = data[tostring(target)]['settings']['lock_reply']
   if group_reply_lock == 'yes' then
     return 'Replying is already locked'
   else
     data[tostring(target)]['settings']['lock_reply'] = 'yes'
     save_data(_config.moderation.data, data)
-    return 'Replying has been locked'
+    return 'Replying posting has been locked'
   end
 end
 
@@ -599,14 +603,13 @@ local function unlock_group_reply(msg, data, target)
   end
   local group_reply_lock = data[tostring(target)]['settings']['lock_reply']
   if group_reply_lock == 'no' then
-    return 'Replying is not locked'
+    return 'Replying posting is already unlocked'
   else
     data[tostring(target)]['settings']['lock_reply'] = 'no'
     save_data(_config.moderation.data, data)
-    return 'Replying has been unlocked'
+    return 'Replying posting has been unlocked'
   end
 end
-
 --End supergroup locks
 
 --'Set supergroup rules' function
