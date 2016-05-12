@@ -13,6 +13,7 @@ do local _ = {
     "Broadcast",
     "Calculator",
     "ClashofClans",
+    "Command_Lock",
     "Connect_Server",
     "CPU",
     "Dogify",
