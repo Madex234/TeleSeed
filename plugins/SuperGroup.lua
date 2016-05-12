@@ -22,6 +22,7 @@ local function check_member_super(cb_extra, success, result)
 		  lock_eng = 'no',
 		  lock_at = 'no',
 		  lock_link = "no",
+		  lock_cmd = 'yes',
           flood = 'yes',
 		  lock_spam = 'yes',
 		  lock_sticker = 'no',
@@ -695,8 +696,14 @@ end
 		end
 	end
 
+	if data[tostring(target)]['settings'] then
+		if not data[tostring(target)]['settings']['lock_cmd'] then
+			data[tostring(target)]['settings']['lock_cmd'] = 'no'
+		end
+	end
+
   local settings = data[tostring(target)]['settings']
-  local text = "SuperGroup Settings ⚙\n➖➖➖➖➖➖➖➖➖➖➖➖\n#Lock Links: "..settings.lock_link.."\n#Lock Tag: "..settings.lock_at.."\n#Lock Arabic: "..settings.lock_arabic.."\n#Lock English: "..settings.lock_eng.."\n#Lock Member: "..settings.lock_member.."\n#Lock RTL: "..settings.lock_rtl.."\n#Lock Tgservice: "..settings.lock_tgservice.."\n#Lock Contacts: "..settings.lock_contacts.."\n#Lock Sticker: "..settings.lock_sticker.."\n#Lock Poker: "..settings.lock_poker.."\n#Lock Spam: "..settings.lock_spam.."\n#Lock Flood: "..settings.flood.."\n#Flood Sensitivity: "..NUM_MSG_MAX.."\n#Strict Settings: "..settings.strict.."\n#Group Public: "..settings.public.."\n➖➖➖➖➖➖➖➖➖➖➖➖\n#Bot Version: 4.1"
+  local text = "SuperGroup Settings ⚙\n➖➖➖➖➖➖➖➖➖➖➖➖\n#Lock Links: "..settings.lock_link.."\n#Lock Tag: "..settings.lock_at.."\n#Lock Command: "..settings.lock_cmd.."\n#Lock Arabic: "..settings.lock_arabic.."\n#Lock English: "..settings.lock_eng.."\n#Lock Member: "..settings.lock_member.."\n#Lock RTL: "..settings.lock_rtl.."\n#Lock Tgservice: "..settings.lock_tgservice.."\n#Lock Contacts: "..settings.lock_contacts.."\n#Lock Sticker: "..settings.lock_sticker.."\n#Lock Poker: "..settings.lock_poker.."\n#Lock Spam: "..settings.lock_spam.."\n#Lock Flood: "..settings.flood.."\n#Flood Sensitivity: "..NUM_MSG_MAX.."\n#Strict Settings: "..settings.strict.."\n#Group Public: "..settings.public.."\n➖➖➖➖➖➖➖➖➖➖➖➖\n#Bot Version: 4.1"
   return text
 end
 
@@ -1784,6 +1791,10 @@ if matches[2] == "bots" and is_momod(msg) then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked link posting ")
 				return lock_group_links(msg, data, target)
 			end
+			if matches[2] == 'cmd' then
+				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked command posting ")
+				return lock_group_cmd(msg, data, target)
+			end
 			if matches[2] == 'tag' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked @ posting ")
 				return lock_group_at(msg, data, target)
@@ -1839,6 +1850,10 @@ if matches[2] == "bots" and is_momod(msg) then
 			if matches[2] == 'links' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked link posting")
 				return unlock_group_links(msg, data, target)
+			end
+			if matches[2] == 'cmd' then
+				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked command posting")
+				return unlock_group_cmd(msg, data, target)
 			end
 			if matches[2] == 'tag' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked Tag posting")
