@@ -225,6 +225,7 @@ function create_config( )
     "Broadcast",
     "Calculator",
     "ClashofClans",
+    "Command_Lock",
     "Connect_Server",
     "CPU",
     "Dogify",
