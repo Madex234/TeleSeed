@@ -17,6 +17,7 @@ do local _ = {
     "Command_Lock",
     "Connect_Server",
     "Date",
+    "Delete_Plugin",
     "Dogify",
     "English_Lock",
     "Expand",
