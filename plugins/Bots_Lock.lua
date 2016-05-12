@@ -2,6 +2,15 @@ do
 
 local function pre_process(msg)
     
+    local data = load_data(_config.moderation.data)
+    if data[tostring(msg.to.id)] then
+        if data[tostring(msg.to.id)]['settings'] then
+            if data[tostring(msg.to.id)]['settings']['lock_reply'] then
+                lock_reply = data[tostring(msg.to.id)]['settings']['lock_reply']
+            end
+        end
+end
+
     local hash = 'mate:'..msg.to.id
     if redis:get(hash) and msg.reply_id and not is_sudo(msg) and not is_owner(msg) and not is_momod(msg) and not is_admin1(msg) then
             delete_msg(msg.id, ok_cb, true)
@@ -27,8 +36,6 @@ end
 
 return {
     patterns = {
-        '^[/!#](lock) reply$',
-        '^[/!#](unlock) reply$'
     },
     run = run,
     pre_process = pre_process
