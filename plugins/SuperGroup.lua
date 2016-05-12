@@ -568,7 +568,7 @@ local function lock_group_cmd(msg, data, target)
   end
 end
 
-local function unlock_group_poker(msg, data, target)
+local function unlock_group_cmd(msg, data, target)
   if not is_momod(msg) then
     return
   end
