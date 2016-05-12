@@ -61,6 +61,7 @@ do local _ = {
     "Set_Welcome",
     "Github",
     "Short_Link",
+    "Show_Plugin",
     "Spammer",
     "SpeedTest",
     "SpeedTest_Share",
