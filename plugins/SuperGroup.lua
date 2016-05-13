@@ -1863,7 +1863,7 @@ if matches[2] == "bots" and is_momod(msg) then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked command posting ")
 				return lock_group_cmd(msg, data, target)
 			end
-			if matches[2] == 'fwd' then
+			if matches[2] == 'forward' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked forwarding ")
 				return lock_group_fwd(msg, data, target)
 			end
@@ -1931,7 +1931,7 @@ if matches[2] == "bots" and is_momod(msg) then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked command posting")
 				return unlock_group_cmd(msg, data, target)
 			end
-			if matches[2] == 'fwd' then
+			if matches[2] == 'forward' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked forwarding ")
 				return unlock_group_fwd(msg, data, target)
 			end
