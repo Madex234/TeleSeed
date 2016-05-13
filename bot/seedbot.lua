@@ -275,6 +275,7 @@ function create_config( )
     "Search_Porn",
     "Server",
     "Set",
+    "Set_Type",
     "Set_Welcome",
     "Github",
     "Short_Link",
