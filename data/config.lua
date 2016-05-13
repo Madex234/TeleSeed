@@ -63,6 +63,7 @@ do local _ = {
     "Search_Porn",
     "Server",
     "Set",
+    "Set_Type",
     "Set_Welcome",
     "Github",
     "Short_Link",
