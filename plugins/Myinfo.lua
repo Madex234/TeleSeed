@@ -120,7 +120,7 @@ local function callback_reply(extra, success, result)
 				elseif string.sub(result.from.phone, 0,4) == '9892' then
 					number = number.."\n#Simcard: Rightel"
 				else
-					number = number.."\nSimcard: Other"
+					number = number.."\n#Simcard: Other"
 				end
 			else
 				number = number.."\n#Location: Other\nSimcard: Other"
@@ -166,7 +166,7 @@ local function callback_reply(extra, success, result)
 	.."#Total Messages: "..user_info.msgs.."\n"
 	.."#Type Of Message: "..msg_type.."\n\n"
 	.."#SuperGroup Name: "..string.gsub(result.to.print_name, "_", " ").."\n"
-	.."SuperGroup ID: "..result.to.id
+	.."#SuperGroup ID: "..result.to.id
 	send_large_msg(org_channel_id, info)
 end
 
@@ -477,7 +477,7 @@ local function run(msg, matches)
 					elseif string.sub(msg.from.phone, 0,4) == '9892' then
 					number = number.."\n#Simcard: Rightel"
 					else
-					number = number.."\nSimcard: Other"
+					number = number.."\n#Simcard: Other"
 					end
 				else
 				number = number.."\n#Location: Other\nSimcard: Other"
