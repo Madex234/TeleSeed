@@ -3,26 +3,26 @@ local function callback_reply(extra, success, result)
 	userrank = "Member"
 	if tonumber(result.from.id) == 48167877 then
 		userrank = "Master ⭐⭐⭐⭐"
-		send_document(org_channel_id,"./icons/7.webp", ok_cb, false)
+		send_document(org_channel_id,"umbrella/stickers/master.webp", ok_cb, false)
 	elseif is_sudo(result) then
 		userrank = "Sudo ⭐⭐⭐⭐⭐"
-		send_document(org_channel_id,"./icons/8.webp", ok_cb, false)
-	elseif is_admin1(result) then
+		send_document(org_channel_id,"umbrella/stickers/sudo.webp", ok_cb, false)
+	elseif is_admin2(result.from.id) then
 		userrank = "Admin ⭐⭐⭐"
-		send_document(org_channel_id,"./icons/3.webp", ok_cb, false)
-	elseif tonumber(result.from.id) == tonumber(is_owner) then
+		send_document(org_channel_id,"umbrella/stickers/admin.webp", ok_cb, false)
+	elseif is_owner2(result.from.id, result.to.id) then
 		userrank = "Leader ⭐⭐"
-		send_document(org_channel_id,"./icons/6.webp", ok_cb, false)
-	elseif is_momod(result) then
+		send_document(org_channel_id,"umbrella/stickers/leader.webp", ok_cb, false)
+	elseif is_momod2(result.from.id, result.to.id) then
 		userrank = "Moderator ⭐"
-		send_document(org_channel_id,"./icons/4.webp", ok_cb, false)
+		send_document(org_channel_id,"umbrella/stickers/mod.webp", ok_cb, false)
 	elseif tonumber(result.from.id) == tonumber(our_id) then
 		userrank = "TeleGuard ⭐⭐⭐⭐⭐⭐"
-		send_document(org_channel_id,"./icons/9.webp", ok_cb, false)
+		send_document(org_channel_id,"umbrella/stickers/umb.webp", ok_cb, false)
 	elseif result.from.username then
 		if string.sub(result.from.username:lower(), -3) == "bot" then
 			userrank = "API Bot"
-			send_document(org_channel_id,"./icons/5.webp", ok_cb, false)
+			send_document(org_channel_id,"umbrella/stickers/api.webp", ok_cb, false)
 		end
 	end
 	--custom rank ------------------------------------------------------------------------------------------------
@@ -155,11 +155,12 @@ local function callback_reply(extra, success, result)
 	end
 	--info ------------------------------------------------------------------------------------------------
 	info = "#Fullname: "..string.gsub(result.from.print_name, "_", " ").."\n"
-	.."#Firstname: "..(result.from.first_name or "").."\n"
-	.."#Lastname: "..(result.from.last_name or "").."\n\n"
+	.."#Firstname: "..(result.from.first_name or "-----").."\n"
+	.."#Lastname: "..(result.from.last_name or "-----").."\n\n"
 	.."#Phonenumber: "..number.."\n"
-	.."#Username: Telegram.me/"..(result.from.username or "").."\n"
+	.."#Username: Telegram.me/"..(result.from.username or "-----").."\n"
 	.."#ID: "..result.from.id.."\n\n"
+	.."#Rank: "..usertype.."\n"
 	.."#Position: "..userrank.."\n\n"
 	.."#Interface: "..hardware.."\n"
 	.."#Total Messages: "..user_info.msgs.."\n"
@@ -176,27 +177,29 @@ local function callback_res(extra, success, result)
 	--icon & rank ------------------------------------------------------------------------------------------------
 	if tonumber(result.id) == 48167877 then
 		userrank = "Master ⭐⭐⭐⭐"
-		send_document(org_channel_id,"./icons/7.webp", ok_cb, false)
+		send_document(org_channel_id,"umbrella/stickers/master.webp", ok_cb, false)
 	elseif is_sudo(result) then
 		userrank = "Sudo ⭐⭐⭐⭐⭐"
-		send_document(org_channel_id,"./icons/8.webp", ok_cb, false)
-	elseif is_admin1(result) then
+		send_document(org_channel_id,"umbrella/stickers/sudo.webp", ok_cb, false)
+	elseif is_admin2(result.id) then
 		userrank = "Admin ⭐⭐⭐"
-		send_document(org_channel_id,"./icons/3.webp", ok_cb, false)
-	elseif tonumber(result.id) == tonumber(is_owner) then
-		userrank = "Owner ⭐⭐"
-		send_document(org_channel_id,"./icons/6.webp", ok_cb, false)
-	elseif is_momod(result) then
-		userrank = "Leader ⭐"
-		send_document(org_channel_id,"./icons/4.webp", ok_cb, false)
+		send_document(org_channel_id,"umbrella/stickers/admin.webp", ok_cb, false)
+	elseif is_owner2(result.id, extra.channel2) then
+		userrank = "Leader ⭐⭐"
+		send_document(org_channel_id,"umbrella/stickers/leader.webp", ok_cb, false)
+	elseif is_momod2(result.id, extra.channel2) then
+		userrank = "Moderator ⭐"
+		send_document(org_channel_id,"umbrella/stickers/mod.webp", ok_cb, false)
 	elseif tonumber(result.id) == tonumber(our_id) then
 		userrank = "TeleGuard ⭐⭐⭐⭐⭐⭐"
-		send_document(org_channel_id,"./icons/9.webp", ok_cb, false)
-	elseif string.sub(result.username:lower(), -3) == 'bot' then
-		userrank = "API Bot"
-		send_document(org_channel_id,"./icons/5.webp", ok_cb, false)
+		send_document(org_channel_id,"umbrella/stickers/umb.webp", ok_cb, false)
+	elseif result.from.username then
+		if string.sub(result.from.username:lower(), -3) == "bot" then
+			userrank = "API Bot"
+			send_document(org_channel_id,"umbrella/stickers/api.webp", ok_cb, false)
 	else
 		userrank = "Member"
+	end
 	end
 	--custom rank ------------------------------------------------------------------------------------------------
 	local file = io.open("./info/"..result.id..".txt", "r")
@@ -207,19 +210,19 @@ local function callback_res(extra, success, result)
 	end
 	--phone ------------------------------------------------------------------------------------------------
 	if access == 1 then
-		if result.from.phone then
-			number = "0"..string.sub(result.from.phone, 3)
-			if string.sub(result.from.phone, 0,2) == '98' then
+		if result.phone then
+			number = "0"..string.sub(result.phone, 3)
+			if string.sub(result.phone, 0,2) == '98' then
 				number = number.."\nLocation: Iran Islamic"
-				if string.sub(result.from.phone, 0,4) == '9891' then
+				if string.sub(result.phone, 0,4) == '9891' then
 					number = number.."\nSimcard: Hamrahaval"
-				elseif string.sub(result.from.phone, 0,5) == '98932' then
+				elseif string.sub(result.phone, 0,5) == '98932' then
 					number = number.."\nSimcard: Taliya"
-				elseif string.sub(result.from.phone, 0,4) == '9893' then
+				elseif string.sub(result.phone, 0,4) == '9893' then
 					number = number.."\nSimcard: MTN Irancell"
-				elseif string.sub(result.from.phone, 0,4) == '9890' then
+				elseif string.sub(result.phone, 0,4) == '9890' then
 					number = number.."\nSimcard: MTN Irancell"
-				elseif string.sub(result.from.phone, 0,4) == '9892' then
+				elseif string.sub(result.phone, 0,4) == '9892' then
 					number = number.."\nSimcard: Rightel"
 				else
 					number = number.."\nSimcard: Other"
@@ -231,19 +234,19 @@ local function callback_res(extra, success, result)
 			number = "-----"
 		end
 	elseif access == 0 then
-		if result.from.phone then
+		if result.phone then
 			number = "You Don't Have Access"
-			if string.sub(result.from.phone, 0,2) == '98' then
+			if string.sub(result.phone, 0,2) == '98' then
 				number = number.."\nLocation: Iran Islamic"
-				if string.sub(result.from.phone, 0,4) == '9891' then
+				if string.sub(result.phone, 0,4) == '9891' then
 					number = number.."\nSimcard: Hamrahaval"
-				elseif string.sub(result.from.phone, 0,5) == '98932' then
+				elseif string.sub(result.phone, 0,5) == '98932' then
 					number = number.."\nSimcard: Taliya"
-				elseif string.sub(result.from.phone, 0,4) == '9893' then
+				elseif string.sub(result.phone, 0,4) == '9893' then
 					number = number.."\nSimcard: MTN Irancell"
-				elseif string.sub(result.from.phone, 0,4) == '9890' then
+				elseif string.sub(result.phone, 0,4) == '9890' then
 					number = number.."\nSimcard: MTN Irancell"
-				elseif string.sub(result.from.phone, 0,4) == '9892' then
+				elseif string.sub(result.phone, 0,4) == '9892' then
 					number = number.."\nSimcard: Rightel"
 				else
 					number = number.."\nSimcard: Other"
@@ -259,41 +262,44 @@ local function callback_res(extra, success, result)
 	info = "#Fullname: "..string.gsub(result.print_name, "_", " ").."\n"
 	.."#Firstname: "..(result.first_name or "-----").."\n"
 	.."#Lastname: "..(result.last_name or "-----").."\n\n"
-	.."Phonenumber: "..number.."\n"
+	.."#Phonenumber: "..number.."\n"
 	.."#Username: Telegram.me/"..(result.username or "-----").."\n"
 	.."#ID: "..result.id.."\n\n"
+	.."#Rank: "..usertype.."\n"
 	.."#Position: "..userrank.."\n\n"
-	send_large_msg(org_chat_id, info)
+	send_large_msg(org_channel_id, info)
 end
 
-local function callback_res(extra, success, result)
+local function callback_info(extra, success, result)
 	if success == 0 then
 		return send_large_msg(org_channel_id, "Username Not Found")
 	end
 	--icon & rank ------------------------------------------------------------------------------------------------
 	if tonumber(result.id) == 48167877 then
 		userrank = "Master ⭐⭐⭐⭐"
-		send_document(org_channel_id,"./icons/7.webp", ok_cb, false)
+		send_document(org_channel_id,"umbrella/stickers/master.webp", ok_cb, false)
 	elseif is_sudo(result) then
 		userrank = "Sudo ⭐⭐⭐⭐⭐"
-		send_document(org_channel_id,"./icons/8.webp", ok_cb, false)
-	elseif is_admin1(result) then
+		send_document(org_channel_id,"umbrella/stickers/sudo.webp", ok_cb, false)
+	elseif is_admin2(result.id) then
 		userrank = "Admin ⭐⭐⭐"
-		send_document(org_channel_id,"./icons/3.webp", ok_cb, false)
-	elseif tonumber(result.id) == tonumber(is_owner) then
+		send_document(org_channel_id,"umbrella/stickers/admin.webp", ok_cb, false)
+	elseif is_owner2(result.id, extra.channel2) then
 		userrank = "Leader ⭐⭐"
-		send_document(org_channel_id,"./icons/6.webp", ok_cb, false)
-	elseif is_momod(result) then
+		send_document(org_channel_id,"umbrella/stickers/leader.webp", ok_cb, false)
+	elseif is_momod2(result.id, extra.channel2) then
 		userrank = "Moderator ⭐"
-		send_document(org_channel_id,"./icons/4.webp", ok_cb, false)
+		send_document(org_channel_id,"umbrella/stickers/mod.webp", ok_cb, false)
 	elseif tonumber(result.id) == tonumber(our_id) then
 		userrank = "TeleGuard ⭐⭐⭐⭐⭐⭐"
-		send_document(org_channel_id,"./icons/9.webp", ok_cb, false)
-	elseif string.sub(result.username:lower(), -3) == 'bot' then
-		userrank = "API Bot"
-		send_document(org_channel_id,"./icons/5.webp", ok_cb, false)
+		send_document(org_channel_id,"umbrella/stickers/umb.webp", ok_cb, false)
+	elseif result.from.username then
+		if string.sub(result.from.username:lower(), -3) == "bot" then
+			userrank = "API Bot"
+			send_document(org_channel_id,"umbrella/stickers/api.webp", ok_cb, false)
 	else
 		userrank = "Member"
+	end
 	end
 	--custom rank ------------------------------------------------------------------------------------------------
 	local file = io.open("./info/"..result.id..".txt", "r")
@@ -304,19 +310,19 @@ local function callback_res(extra, success, result)
 	end
 	--phone ------------------------------------------------------------------------------------------------
 	if access == 1 then
-		if result.from.phone then
-			number = "0"..string.sub(result.from.phone, 3)
-			if string.sub(result.from.phone, 0,2) == '98' then
+		if result.phone then
+			number = "0"..string.sub(result.phone, 3)
+			if string.sub(result.phone, 0,2) == '98' then
 				number = number.."\nLocation: Iran Islamic"
-				if string.sub(result.from.phone, 0,4) == '9891' then
+				if string.sub(result.phone, 0,4) == '9891' then
 					number = number.."\nSimcard: Hamrahaval"
-				elseif string.sub(result.from.phone, 0,5) == '98932' then
+				elseif string.sub(result.phone, 0,5) == '98932' then
 					number = number.."\nSimcard: Taliya"
-				elseif string.sub(result.from.phone, 0,4) == '9893' then
+				elseif string.sub(result.phone, 0,4) == '9893' then
 					number = number.."\nSimcard: MTN Irancell"
-				elseif string.sub(result.from.phone, 0,4) == '9890' then
+				elseif string.sub(result.phone, 0,4) == '9890' then
 					number = number.."\nSimcard: MTN Irancell"
-				elseif string.sub(result.from.phone, 0,4) == '9892' then
+				elseif string.sub(result.phone, 0,4) == '9892' then
 					number = number.."\nSimcard: Rightel"
 				else
 					number = number.."\nSimcard: Other"
@@ -328,19 +334,19 @@ local function callback_res(extra, success, result)
 			number = "-----"
 		end
 	elseif access == 0 then
-		if result.from.phone then
+		if result.phone then
 			number = "You Don't Have Access"
-			if string.sub(result.from.phone, 0,2) == '98' then
+			if string.sub(result.phone, 0,2) == '98' then
 				number = number.."\nLocation: Iran Islamic"
-				if string.sub(result.from.phone, 0,4) == '9891' then
+				if string.sub(result.phone, 0,4) == '9891' then
 					number = number.."\nSimcard: Hamrahaval"
-				elseif string.sub(result.from.phone, 0,5) == '98932' then
+				elseif string.sub(result.phone, 0,5) == '98932' then
 					number = number.."\nSimcard: Taliya"
-				elseif string.sub(result.from.phone, 0,4) == '9893' then
+				elseif string.sub(result.phone, 0,4) == '9893' then
 					number = number.."\nSimcard: MTN Irancell"
-				elseif string.sub(result.from.phone, 0,4) == '9890' then
+				elseif string.sub(result.phone, 0,4) == '9890' then
 					number = number.."\nSimcard: MTN Irancell"
-				elseif string.sub(result.from.phone, 0,4) == '9892' then
+				elseif string.sub(result.phone, 0,4) == '9892' then
 					number = number.."\nSimcard: Rightel"
 				else
 					number = number.."\nSimcard: Other"
@@ -383,22 +389,22 @@ local function callback_res(extra, success, result)
 	.."#Phonenumber: "..number.."\n"
 	.."#Username: Telegram.me/"..(result.username or "-----").."\n"
 	.."#ID: "..result.id.."\n\n"
+	.."#Rank: "..usertype.."\n"
 	.."#Position: "..userrank.."\n\n"
-	send_large_msg(org_chat_id, info)
+	send_large_msg(org_channel_id, info)
 end
 
 local function run(msg, matches)
 	local data = load_data(_config.moderation.data)
-	is_owner = data[tostring(msg.to.id)]['settings']['is_owner']
 	org_channel_id = "channel#id"..msg.to.id
 	if is_sudo(msg) then
 		access = 1
 	else
 		access = 0
 	end
-	if matches[1] == 'infodel' and is_sudo(msg) then
+	if matches[1] == '/infodel' and is_sudo(msg) then
 		azlemagham = io.popen('rm ./info/'..matches[2]..'.txt'):read('*all')
-		return 'Was Removed From His Position'
+		return 'Was Removed From His Rank'
 	elseif matches[1] == '/info' and is_sudo(msg) then
 		local name = string.sub(matches[2], 1, 50)
 		local text = string.sub(matches[3], 1, 10000000000)
@@ -423,7 +429,7 @@ local function run(msg, matches)
 			usertype = "-----"
 		end
 		--hardware ------------------------------------------------------------------------------------------------
-		if matches[1] == "myinfo" then
+		if matches[1] == "info" then
 			hardware = "Computer"
 		else
 			hardware = "Mobile"
@@ -438,19 +444,19 @@ local function run(msg, matches)
 			--icon & rank ------------------------------------------------------------------------------------------------
 			if tonumber(msg.from.id) == 48167877 then
 				userrank = "Master ⭐⭐⭐⭐"
-				send_document("channel#id"..msg.to.id,"./icons/7.webp", ok_cb, false)
+				send_document("channel#id"..msg.to.id,"umbrella/stickers/master.webp", ok_cb, false)
 			elseif is_sudo(msg) then
 				userrank = "Sudo ⭐⭐⭐⭐⭐"
-				send_document("channel#id"..msg.to.id,"./icons/8.webp", ok_cb, false)
-			elseif is_admin1(msg) then
+				send_document("channel#id"..msg.to.id,"umbrella/stickers/sudo.webp", ok_cb, false)
+			elseif is_admin(msg) then
 				userrank = "Admin ⭐⭐⭐"
-				send_document("channel#id"..msg.to.id,"./icons/3.webp", ok_cb, false)
-			elseif tonumber(msg.from.id) == tonumber(is_owner) then
+				send_document("channel#id"..msg.to.id,"umbrella/stickers/admin.webp", ok_cb, false)
+			elseif is_owner(msg) then
 				userrank = "Leader ⭐⭐"
-				send_document("channel#id"..msg.to.id,"./icons/6.webp", ok_cb, false)
+				send_document("channel#id"..msg.to.id,"umbrella/stickers/leader.webp", ok_cb, false)
 			elseif is_momod(msg) then
 				userrank = "Moderator ⭐"
-				send_document("channel#id"..msg.to.id,"./icons/4.webp", ok_cb, false)
+				send_document("channel#id"..msg.to.id,"umbrella/stickers/mod.webp", ok_cb, false)
 			else
 				userrank = "Member"
 			end
@@ -460,39 +466,38 @@ local function run(msg, matches)
 				number = "****0"..string.sub(numberorg, 0,6)
 				if string.sub(msg.from.phone, 0,2) == '98' then
 				number = number.."\nLocation: Iran Islamic"
-				if string.sub(msg.from.phone, 0,4) == '9891' then
+					if string.sub(msg.from.phone, 0,4) == '9891' then
 					number = number.."\nSimcard: Hamrahaval"
-				elseif string.sub(msg.from.phone, 0,5) == '98932' then
+					elseif string.sub(msg.from.phone, 0,5) == '98932' then
 					number = number.."\nSimcard: Taliya"
-				elseif string.sub(msg.from.phone, 0,4) == '9893' then
+					elseif string.sub(msg.from.phone, 0,4) == '9893' then
 					number = number.."\nSimcard: MTN Irancell"
-				elseif string.sub(msg.from.phone, 0,4) == '9890' then
+					elseif string.sub(msg.from.phone, 0,4) == '9890' then
 					number = number.."\nSimcard: MTN Irancell"
-				elseif string.sub(msg.from.phone, 0,4) == '9892' then
+					elseif string.sub(msg.from.phone, 0,4) == '9892' then
 					number = number.."\nSimcard: Rightel"
-				else
+					else
 					number = number.."\nSimcard: Other"
-				end
-			else
+					end
+				else
 				number = number.."\nLocation: Other\nSimcard: Other"
 				end
 			else
 				number = "-----"
 			end
 			--info ------------------------------------------------------------------------------------------------
-				local info = "#Fullname: "..string.gsub(msg.from.print_name, "_", " ").."\n"
-				.."#Firstname: "..(msg.from.first_name or "").."\n"
-				.."#Lastname: "..(msg.from.last_name or "").."\n\n"
-				.."#Phonenumber: "..number.."\n"
-				.."#Username: Telegram.me/"..(msg.from.username or "").."\n"
-				.."#ID: "..msg.from.id.."\n\n"
-				.."#Position: "..userrank.."\n\n"
-				.."#Interface: "..hardware.."\n"
-				.."#Total Messages: "..user_info.msgs.."\n"
-				.."#Type Of Message: "..msg_type.."\n\n"
-				.."#SuperGroup Name: "..string.gsub(msg.to.print_name, "_", " ").."\n"
-				.."#SuperGroup ID: "..msg.to.id
-	send_large_msg(org_channel_id, info)
+			local info = "#Fullname: "..string.gsub(msg.from.print_name, "_", " ").."\n"
+					.."#Firstname: "..(msg.from.first_name or "-----").."\n"
+					.."#Lastname: "..(msg.from.last_name or "-----").."\n\n"
+					.."#Phonenumber: "..number.."\n"
+					.."#Username: Telegram.me/"..(msg.from.username or "-----").."\n"
+					.."#ID: "..msg.from.id.."\n\n"
+					.."#Rank: "..usertype.."\n"
+					.."#Position: "..userrank.."\n\n"
+					.."#Interface: "..hardware.."\n"
+					.."#Total Messages: "..user_info.msgs.."\n\n"
+					.."#SuperGroup Name: "..string.gsub(msg.to.print_name, "_", " ").."\n"
+					.."#SuperGroup ID: "..msg.to.id
 			return info
 		else
 			get_message(msg.reply_id, callback_reply, false)
@@ -516,11 +521,11 @@ return {
 			},
 		},
 	patterns = {
-		"^[!/#]infodel (.*)$",
-		"^[!/#]info ([^%s]+) (.*)$",
-		"^[!/#]info (.*)$",
-		"^[!#/]myinfo$",
-		"^[!#/]myinfo$",
+		"^(/infodel) (.*)$",
+		"^(/info) ([^%s]+) (.*)$",
+		"^([Ii]nfo) (.*)$",
+		"^(info)$",
+		"^(Info)$",
 	},
 	run = run,
 }
