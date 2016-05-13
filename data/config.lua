@@ -34,7 +34,6 @@ do local _ = {
     "Full_Help",
     "Help",
     "Image_Maker",
-    "Info",
     "Ingroup",
     "Inpm",
     "Inrealm",
