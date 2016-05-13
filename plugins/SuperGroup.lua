@@ -23,6 +23,7 @@ local function check_member_super(cb_extra, success, result)
 		  lock_at = 'no',
 		  lock_link = "no",
 		  lock_cmd = 'yes',
+		  lock_badw = 'yes',
           flood = 'yes',
 		  lock_spam = 'yes',
 		  lock_sticker = 'no',
@@ -639,6 +640,34 @@ local function unlock_group_fwd(msg, data, target)
     return 'Forwarding has been unlocked'
   end
 end
+
+local function lock_group_badw(msg, data, target)
+  if not is_momod(msg) then
+    return
+  end
+  local group_badw_lock = data[tostring(target)]['settings']['lock_badw']
+  if group_badw_lock == 'yes' then
+    return 'Badword is already locked'
+  else
+    data[tostring(target)]['settings']['lock_badw'] = 'yes'
+    save_data(_config.moderation.data, data)
+    return 'Badword has been locked'
+  end
+end
+
+local function unlock_group_badw(msg, data, target)
+  if not is_momod(msg) then
+    return
+  end
+  local group_badw_lock = data[tostring(target)]['settings']['lock_badw']
+  if group_badw_lock == 'no' then
+    return 'Badword is already unlocked'
+  else
+    data[tostring(target)]['settings']['lock_badw'] = 'no'
+    save_data(_config.moderation.data, data)
+    return 'Badword has been unlocked'
+  end
+end
 --End supergroup locks
 
 --'Set supergroup rules' function
@@ -770,8 +799,13 @@ end
 			data[tostring(target)]['settings']['lock_fwd'] = 'no'
 		end
 	end
+	if data[tostring(target)]['settings'] then
+		if not data[tostring(target)]['settings']['lock_badw'] then
+			data[tostring(target)]['settings']['lock_badw'] = 'no'
+		end
+	end
   local settings = data[tostring(target)]['settings']
-  local text = "SuperGroup Settings ⚙\n➖➖➖➖➖➖➖➖➖➖➖➖\n#Lock Links: "..settings.lock_link.."\n#Lock Tag: "..settings.lock_at.."\n#Lock Command: "..settings.lock_cmd.."\n#Lock Reply: "..settings.lock_reply.."\n#Lock Forward: "..settings.lock_fwd.."\n#Lock Arabic: "..settings.lock_arabic.."\n#Lock English: "..settings.lock_eng.."\n#Lock Member: "..settings.lock_member.."\n#Lock RTL: "..settings.lock_rtl.."\n#Lock Tgservice: "..settings.lock_tgservice.."\n#Lock Contacts: "..settings.lock_contacts.."\n#Lock Sticker: "..settings.lock_sticker.."\n#Lock Poker: "..settings.lock_poker.."\n#Lock Spam: "..settings.lock_spam.."\n#Lock Flood: "..settings.flood.."\n#Flood Sensitivity: "..NUM_MSG_MAX.."\n#Strict Settings: "..settings.strict.."\n#Group Public: "..settings.public.."\n➖➖➖➖➖➖➖➖➖➖➖➖\n#Bot Version: 4.1"
+  local text = "SuperGroup Settings ⚙\n➖➖➖➖➖➖➖➖➖➖➖➖\n#Lock Links: "..settings.lock_link.."\n#Lock Tag: "..settings.lock_at.."\n#Lock Command: "..settings.lock_cmd.."\n#Lock Reply: "..settings.lock_reply.."\n#Lock Forward: "..settings.lock_fwd.."\n#Lock Badword: "..settings.lock_badw.."\n#Lock Arabic: "..settings.lock_arabic.."\n#Lock English: "..settings.lock_eng.."\n#Lock Member: "..settings.lock_member.."\n#Lock RTL: "..settings.lock_rtl.."\n#Lock Tgservice: "..settings.lock_tgservice.."\n#Lock Contacts: "..settings.lock_contacts.."\n#Lock Sticker: "..settings.lock_sticker.."\n#Lock Poker: "..settings.lock_poker.."\n#Lock Spam: "..settings.lock_spam.."\n#Lock Flood: "..settings.flood.."\n#Flood Sensitivity: "..NUM_MSG_MAX.."\n#Strict Settings: "..settings.strict.."\n#Group Public: "..settings.public.."\n➖➖➖➖➖➖➖➖➖➖➖➖\n#Bot Version: 4.1"
   return text
 end
 
@@ -1863,6 +1897,10 @@ if matches[2] == "bots" and is_momod(msg) then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked command posting ")
 				return lock_group_cmd(msg, data, target)
 			end
+			if matches[2] == 'badword' then
+				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked badword posting ")
+				return lock_group_badw(msg, data, target)
+			end
 			if matches[2] == 'forward' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked forwarding ")
 				return lock_group_fwd(msg, data, target)
@@ -1930,6 +1968,10 @@ if matches[2] == "bots" and is_momod(msg) then
 			if matches[2] == 'cmd' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked command posting")
 				return unlock_group_cmd(msg, data, target)
+			end
+			if matches[2] == 'badword' then
+				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked badword posting")
+				return unlock_group_badw(msg, data, target)
 			end
 			if matches[2] == 'forward' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked forwarding ")
