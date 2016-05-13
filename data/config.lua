@@ -10,7 +10,6 @@ do local _ = {
     "Azan",
     "Banhammer",
     "Banner",
-    "Bots_Lock",
     "Broadcast",
     "CPU",
     "Calculator",
