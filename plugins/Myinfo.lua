@@ -7,7 +7,7 @@ local function callback_reply(extra, success, result)
 	elseif is_sudo(result) then
 		userrank = "Sudo ⭐⭐⭐⭐⭐"
 		send_document(org_channel_id,"umbrella/stickers/sudo.webp", ok_cb, false)
-	elseif is_admin2(result.from.id) then
+	elseif is_admin1(result.from.id) then
 		userrank = "Admin ⭐⭐⭐"
 		send_document(org_channel_id,"umbrella/stickers/admin.webp", ok_cb, false)
 	elseif is_owner2(result.from.id, result.to.id) then
@@ -180,7 +180,7 @@ local function callback_res(extra, success, result)
 	elseif is_sudo(result) then
 		userrank = "Sudo ⭐⭐⭐⭐⭐"
 		send_document(org_channel_id,"umbrella/stickers/sudo.webp", ok_cb, false)
-	elseif is_admin2(result.id) then
+	elseif is_admin1(result.id) then
 		userrank = "Admin ⭐⭐⭐"
 		send_document(org_channel_id,"umbrella/stickers/admin.webp", ok_cb, false)
 	elseif is_owner2(result.id, extra.channel2) then
@@ -279,7 +279,7 @@ local function callback_info(extra, success, result)
 	elseif is_sudo(result) then
 		userrank = "Sudo ⭐⭐⭐⭐⭐"
 		send_document(org_channel_id,"umbrella/stickers/sudo.webp", ok_cb, false)
-	elseif is_admin2(result.id) then
+	elseif is_admin1(result.id) then
 		userrank = "Admin ⭐⭐⭐"
 		send_document(org_channel_id,"umbrella/stickers/admin.webp", ok_cb, false)
 	elseif is_owner2(result.id, extra.channel2) then
@@ -445,7 +445,7 @@ local function run(msg, matches)
 			elseif is_sudo(msg) then
 				userrank = "Sudo ⭐⭐⭐⭐⭐"
 				send_document("channel#id"..msg.to.id,"umbrella/stickers/sudo.webp", ok_cb, false)
-			elseif is_admin(msg) then
+			elseif is_admin1(msg) then
 				userrank = "Admin ⭐⭐⭐"
 				send_document("channel#id"..msg.to.id,"umbrella/stickers/admin.webp", ok_cb, false)
 			elseif is_owner(msg) then
