@@ -29,7 +29,6 @@ local function run(msg, matches)
                     local hash = 'mate:'..msg.to.id
                     redis:del(hash)
                     return ""
-					end
 end
 end
 return {
