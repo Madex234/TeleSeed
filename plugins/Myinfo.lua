@@ -399,7 +399,7 @@ local function run(msg, matches)
 	else
 		access = 0
 	end
-	if matches[1] == '/infodel' and is_sudo(msg) then
+	if matches[1] == 'infodel' and is_sudo(msg) then
 		azlemagham = io.popen('rm ./info/'..matches[2]..'.txt'):read('*all')
 		return 'Rank Was Removed'
 	elseif matches[1] == '/info' and is_sudo(msg) then
@@ -426,7 +426,7 @@ local function run(msg, matches)
 			usertype = ""
 		end
 		--hardware ------------------------------------------------------------------------------------------------
-		if matches[1] == "info" then
+		if matches[1] == "myinfo" then
 			hardware = "Computer"
 		else
 			hardware = "Mobile"
@@ -517,11 +517,11 @@ return {
 			},
 		},
 	patterns = {
-		"^(/infodel) (.*)$",
-		"^(/info) ([^%s]+) (.*)$",
+		"^(infodel) (.*)$",
+		"^(info) ([^%s]+) (.*)$",
 		"^([Ii]nfo) (.*)$",
-		"^(info)$",
-		"^(Info)$",
+		"^[!/#]myinfo$",
+		"^[!/#]Myinfo$",
 	},
 	run = run,
 }
