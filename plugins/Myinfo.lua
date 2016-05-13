@@ -11,7 +11,7 @@ local function callback_reply(extra, success, result)
 		userrank = "Admin ⭐⭐⭐"
 		send_document(org_channel_id,"umbrella/stickers/admin.webp", ok_cb, false)
 	elseif is_owner2(result.from.id, result.to.id) then
-		userrank = "Leader ⭐⭐"
+		userrank = "Owner ⭐⭐"
 		send_document(org_channel_id,"umbrella/stickers/leader.webp", ok_cb, false)
 	elseif is_momod2(result.from.id, result.to.id) then
 		userrank = "Moderator ⭐"
@@ -184,7 +184,7 @@ local function callback_res(extra, success, result)
 		userrank = "Admin ⭐⭐⭐"
 		send_document(org_channel_id,"umbrella/stickers/admin.webp", ok_cb, false)
 	elseif is_owner2(result.id, extra.channel2) then
-		userrank = "Leader ⭐⭐"
+		userrank = "Owner ⭐⭐"
 		send_document(org_channel_id,"umbrella/stickers/leader.webp", ok_cb, false)
 	elseif is_momod2(result.id, extra.channel2) then
 		userrank = "Moderator ⭐"
@@ -283,7 +283,7 @@ local function callback_info(extra, success, result)
 		userrank = "Admin ⭐⭐⭐"
 		send_document(org_channel_id,"umbrella/stickers/admin.webp", ok_cb, false)
 	elseif is_owner2(result.id, extra.channel2) then
-		userrank = "Leader ⭐⭐"
+		userrank = "Owner ⭐⭐"
 		send_document(org_channel_id,"umbrella/stickers/leader.webp", ok_cb, false)
 	elseif is_momod2(result.id, extra.channel2) then
 		userrank = "Moderator ⭐"
@@ -449,7 +449,7 @@ local function run(msg, matches)
 				userrank = "Admin ⭐⭐⭐"
 				send_document("channel#id"..msg.to.id,"umbrella/stickers/admin.webp", ok_cb, false)
 			elseif is_owner(msg) then
-				userrank = "Leader ⭐⭐"
+				userrank = "Owner ⭐⭐"
 				send_document("channel#id"..msg.to.id,"umbrella/stickers/leader.webp", ok_cb, false)
 			elseif is_momod(msg) then
 				userrank = "Moderator ⭐"
@@ -460,7 +460,7 @@ local function run(msg, matches)
 			--number ------------------------------------------------------------------------------------------------
 			if msg.from.phone then
 				numberorg = string.sub(msg.from.phone, 3)
-				number = "****0"..string.sub(numberorg, 0,6)
+				number = "0****"..string.sub(numberorg, 0,6)
 				if string.sub(msg.from.phone, 0,2) == '98' then
 				number = number.."\n#Location: Iran Islamic"
 					if string.sub(msg.from.phone, 0,4) == '9891' then
