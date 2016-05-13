@@ -460,7 +460,7 @@ local function run(msg, matches)
 			--number ------------------------------------------------------------------------------------------------
 			if msg.from.phone then
 				numberorg = string.sub(msg.from.phone, 3)
-				number = "0"..string.sub(numberorg, 0,6)
+				number = "0"..string.sub"****"(numberorg, 0,6)
 				if string.sub(msg.from.phone, 0,2) == '98' then
 				number = number.."\n#Location: Iran Islamic"
 					if string.sub(msg.from.phone, 0,4) == '9891' then
@@ -484,10 +484,10 @@ local function run(msg, matches)
 			end
 			--info ------------------------------------------------------------------------------------------------
 			local info = "#Fullname: "..string.gsub(msg.from.print_name, "_", " ").."\n"
-					.."#Firstname: "..(msg.from.first_name or "-----").."\n"
-					.."#Lastname: "..(msg.from.last_name or "-----").."\n\n"
+					.."#Firstname: "..(msg.from.first_name or "").."\n"
+					.."#Lastname: "..(msg.from.last_name or "").."\n\n"
 					.."#Phonenumber: "..number.."\n\n"
-					.."#Username: Telegram.me/"..(msg.from.username or "-----").."\n"
+					.."#Username: Telegram.me/"..(msg.from.username or "").."\n"
 					.."#ID: "..msg.from.id.."\n"
 					.."#Position: "..userrank.."\n\n"
 					.."#Interface: "..hardware.."\n"
