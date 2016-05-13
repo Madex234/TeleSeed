@@ -34,7 +34,7 @@ return {
 	"kos",
 	"گوساله",
 	"gosale",
-	"gusale"
+	"gusale",
 	"^[Hh][Aa][Rr][Oo][Mm][Ii]$",
 "^[Hh][Aa][Rr][Oo][Mm][Zz][Aa]Dd][Ee]$",
 "^[Nn][Aa][Nn][Ee][Kk][Hh][Aa][Rr][Bb]$",
@@ -191,7 +191,7 @@ return {
 "بسیک",
 "سیکتر",
 "سیک",
-"خوارکسته",
+"خوارکسته"
   },
   run = run
 }
