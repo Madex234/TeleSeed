@@ -30,7 +30,7 @@ local function callback_reply(extra, success, result)
 	if file ~= nil then
 		usertype = file:read("*all")
 	else
-		usertype = "-----"
+		usertype = ""
 	end
 	--cont ------------------------------------------------------------------------------------------------
 	local user_info = {}
@@ -95,70 +95,70 @@ local function callback_reply(extra, success, result)
 			elseif string.match(inputtext, "[A|B|C|D|E|F|G|H|I|J|K|L|M|N|O|P|Q|R|S|T|U|V|W|X|Y|Z]") then
 				hardware = "Mobile"
 			else
-				hardware = "-----"
+				hardware = ""
 			end
 		else
-			hardware = "-----"
+			hardware = ""
 		end
 	else
-		hardware = "-----"
+		hardware = ""
 	end
 	--phone ------------------------------------------------------------------------------------------------
 	if access == 1 then
 		if result.from.phone then
 			number = "0"..string.sub(result.from.phone, 3)
 			if string.sub(result.from.phone, 0,2) == '98' then
-				number = number.."\nLocation: Iran Islamic"
+				number = number.."\n#Location: Iran Islamic"
 				if string.sub(result.from.phone, 0,4) == '9891' then
-					number = number.."\nSimcard: Hamrahaval"
+					number = number.."\n#Simcard: Hamrahaval"
 				elseif string.sub(result.from.phone, 0,5) == '98932' then
-					number = number.."\nSimcard: Taliya"
+					number = number.."\n#Simcard: Taliya"
 				elseif string.sub(result.from.phone, 0,4) == '9893' then
-					number = number.."\nSimcard: MTN Irancell"
+					number = number.."\n#Simcard: MTN Irancell"
 				elseif string.sub(result.from.phone, 0,4) == '9890' then
-					number = number.."\nSimcard: MTN Irancell"
+					number = number.."\n#Simcard: MTN Irancell"
 				elseif string.sub(result.from.phone, 0,4) == '9892' then
-					number = number.."\nSimcard: Rightel"
+					number = number.."\n#Simcard: Rightel"
 				else
 					number = number.."\nSimcard: Other"
 				end
 			else
-				number = number.."\nLocation: Other\nSimcard: Other"
+				number = number.."\n#Location: Other\nSimcard: Other"
 			end
 		else
-			number = "-----"
+			number = ""
 		end
 	elseif access == 0 then
 		if result.from.phone then
 			number = "You Don't Have Access"
 			if string.sub(result.from.phone, 0,2) == '98' then
-				number = number.."\nLocation: Iran Islamic"
+				number = number.."\n#Location: Iran Islamic"
 				if string.sub(result.from.phone, 0,4) == '9891' then
-					number = number.."\nSimcard: Hamrahaval"
+					number = number.."\n#Simcard: Hamrahaval"
 				elseif string.sub(result.from.phone, 0,5) == '98932' then
-					number = number.."\nSimcard: Taliya"
+					number = number.."\n#Simcard: Taliya"
 				elseif string.sub(result.from.phone, 0,4) == '9893' then
-					number = number.."\nSimcard: MTN Irancell"
+					number = number.."\n#Simcard: MTN Irancell"
 				elseif string.sub(result.from.phone, 0,4) == '9890' then
-					number = number.."\nSimcard: MTN Irancell"
+					number = number.."\n#Simcard: MTN Irancell"
 				elseif string.sub(result.from.phone, 0,4) == '9892' then
-					number = number.."\nSimcard: Rightel"
+					number = number.."\n#Simcard: Rightel"
 				else
-					number = number.."\nSimcard: Other"
+					number = number.."\n#Simcard: Other"
 				end
 			else
-				number = number.."\nLocation: Other\nSimcard: Other"
+				number = number.."\n#Location: Other\nSimcard: Other"
 			end
 		else
-			number = "-----"
+			number = ""
 		end
 	end
 	--info ------------------------------------------------------------------------------------------------
 	info = "#Fullname: "..string.gsub(result.from.print_name, "_", " ").."\n"
-	.."#Firstname: "..(result.from.first_name or "-----").."\n"
-	.."#Lastname: "..(result.from.last_name or "-----").."\n\n"
+	.."#Firstname: "..(result.from.first_name or "").."\n"
+	.."#Lastname: "..(result.from.last_name or "").."\n\n"
 	.."#Phonenumber: "..number.."\n"
-	.."#Username: Telegram.me/"..(result.from.username or "-----").."\n"
+	.."#Username: Telegram.me/"..(result.from.username or "").."\n"
 	.."#ID: "..result.from.id.."\n\n"
 	.."#Rank: "..usertype.."\n"
 	.."#Position: "..userrank.."\n\n"
@@ -206,64 +206,64 @@ local function callback_res(extra, success, result)
 	if file ~= nil then
 		usertype = file:read("*all")
 	else
-		usertype = "-----"
+		usertype = ""
 	end
 	--phone ------------------------------------------------------------------------------------------------
 	if access == 1 then
 		if result.phone then
 			number = "0"..string.sub(result.phone, 3)
 			if string.sub(result.phone, 0,2) == '98' then
-				number = number.."\nLocation: Iran Islamic"
+				number = number.."\n#Location: Iran Islamic"
 				if string.sub(result.phone, 0,4) == '9891' then
-					number = number.."\nSimcard: Hamrahaval"
+					number = number.."\n#Simcard: Hamrahaval"
 				elseif string.sub(result.phone, 0,5) == '98932' then
-					number = number.."\nSimcard: Taliya"
+					number = number.."\n#Simcard: Taliya"
 				elseif string.sub(result.phone, 0,4) == '9893' then
-					number = number.."\nSimcard: MTN Irancell"
+					number = number.."\n#Simcard: MTN Irancell"
 				elseif string.sub(result.phone, 0,4) == '9890' then
-					number = number.."\nSimcard: MTN Irancell"
+					number = number.."\n#Simcard: MTN Irancell"
 				elseif string.sub(result.phone, 0,4) == '9892' then
-					number = number.."\nSimcard: Rightel"
+					number = number.."\n#Simcard: Rightel"
 				else
-					number = number.."\nSimcard: Other"
+					number = number.."\n#Simcard: Other"
 				end
 			else
-				number = number.."\nLocation: Other\nSimcard: Other"
+				number = number.."\n#Location: Other\nSimcard: Other"
 			end
 		else
-			number = "-----"
+			number = ""
 		end
 	elseif access == 0 then
 		if result.phone then
 			number = "You Don't Have Access"
 			if string.sub(result.phone, 0,2) == '98' then
-				number = number.."\nLocation: Iran Islamic"
+				number = number.."\n#Location: Iran Islamic"
 				if string.sub(result.phone, 0,4) == '9891' then
-					number = number.."\nSimcard: Hamrahaval"
+					number = number.."\n#Simcard: Hamrahaval"
 				elseif string.sub(result.phone, 0,5) == '98932' then
-					number = number.."\nSimcard: Taliya"
+					number = number.."\n#Simcard: Taliya"
 				elseif string.sub(result.phone, 0,4) == '9893' then
-					number = number.."\nSimcard: MTN Irancell"
+					number = number.."\n#Simcard: MTN Irancell"
 				elseif string.sub(result.phone, 0,4) == '9890' then
-					number = number.."\nSimcard: MTN Irancell"
+					number = number.."\n#Simcard: MTN Irancell"
 				elseif string.sub(result.phone, 0,4) == '9892' then
-					number = number.."\nSimcard: Rightel"
+					number = number.."\n#Simcard: Rightel"
 				else
-					number = number.."\nSimcard: Other"
+					number = number.."\n#Simcard: Other"
 				end
 			else
-				number = number.."\nLocation: Other\nSimcard: Other"
+				number = number.."\n#Location: Other\nSimcard: Other"
 			end
 		else
-			number = "-----"
+			number = ""
 		end
 	end
 	--info ------------------------------------------------------------------------------------------------
 	info = "#Fullname: "..string.gsub(result.print_name, "_", " ").."\n"
-	.."#Firstname: "..(result.first_name or "-----").."\n"
-	.."#Lastname: "..(result.last_name or "-----").."\n\n"
+	.."#Firstname: "..(result.first_name or "").."\n"
+	.."#Lastname: "..(result.last_name or "").."\n\n"
 	.."#Phonenumber: "..number.."\n"
-	.."#Username: Telegram.me/"..(result.username or "-----").."\n"
+	.."#Username: Telegram.me/"..(result.username or "").."\n"
 	.."#ID: "..result.id.."\n\n"
 	.."#Rank: "..usertype.."\n"
 	.."#Position: "..userrank.."\n\n"
@@ -306,56 +306,56 @@ local function callback_info(extra, success, result)
 	if file ~= nil then
 		usertype = file:read("*all")
 	else
-		usertype = "-----"
+		usertype = ""
 	end
 	--phone ------------------------------------------------------------------------------------------------
 	if access == 1 then
 		if result.phone then
 			number = "0"..string.sub(result.phone, 3)
 			if string.sub(result.phone, 0,2) == '98' then
-				number = number.."\nLocation: Iran Islamic"
+				number = number.."\n#Location: Iran Islamic"
 				if string.sub(result.phone, 0,4) == '9891' then
-					number = number.."\nSimcard: Hamrahaval"
+					number = number.."\n#Simcard: Hamrahaval"
 				elseif string.sub(result.phone, 0,5) == '98932' then
-					number = number.."\nSimcard: Taliya"
+					number = number.."\n#Simcard: Taliya"
 				elseif string.sub(result.phone, 0,4) == '9893' then
-					number = number.."\nSimcard: MTN Irancell"
+					number = number.."\n#Simcard: MTN Irancell"
 				elseif string.sub(result.phone, 0,4) == '9890' then
-					number = number.."\nSimcard: MTN Irancell"
+					number = number.."\n#Simcard: MTN Irancell"
 				elseif string.sub(result.phone, 0,4) == '9892' then
-					number = number.."\nSimcard: Rightel"
+					number = number.."\n#Simcard: Rightel"
 				else
-					number = number.."\nSimcard: Other"
+					number = number.."\n#Simcard: Other"
 				end
 			else
-				number = number.."\nLocation: Other\nSimcard: Other"
+				number = number.."\n#Location: Other\nSimcard: Other"
 			end
 		else
-			number = "-----"
+			number = ""
 		end
 	elseif access == 0 then
 		if result.phone then
 			number = "You Don't Have Access"
 			if string.sub(result.phone, 0,2) == '98' then
-				number = number.."\nLocation: Iran Islamic"
+				number = number.."\n#Location: Iran Islamic"
 				if string.sub(result.phone, 0,4) == '9891' then
-					number = number.."\nSimcard: Hamrahaval"
+					number = number.."\n#Simcard: Hamrahaval"
 				elseif string.sub(result.phone, 0,5) == '98932' then
-					number = number.."\nSimcard: Taliya"
+					number = number.."\n#Simcard: Taliya"
 				elseif string.sub(result.phone, 0,4) == '9893' then
-					number = number.."\nSimcard: MTN Irancell"
+					number = number.."\n#Simcard: MTN Irancell"
 				elseif string.sub(result.phone, 0,4) == '9890' then
-					number = number.."\nSimcard: MTN Irancell"
+					number = number.."\n#Simcard: MTN Irancell"
 				elseif string.sub(result.phone, 0,4) == '9892' then
-					number = number.."\nSimcard: Rightel"
+					number = number.."\n#Simcard: Rightel"
 				else
-					number = number.."\nSimcard: Other"
+					number = number.."\n#Simcard: Other"
 				end
 			else
-				number = number.."\nLocation: Other\nSimcard: Other"
+				number = number.."\n#Location: Other\nSimcard: Other"
 			end
 		else
-			number = "-----"
+			number = ""
 		end
 	end
 	--name ------------------------------------------------------------------------------------------------
@@ -371,7 +371,7 @@ local function callback_info(extra, success, result)
 			firstname = result.first_name
 		end
 	else
-		firstname = "-----"
+		firstname = ""
 	end
 	if result.last_name then
 		if string.len(result.last_name) > 15 then
@@ -380,14 +380,14 @@ local function callback_info(extra, success, result)
 			lastname = result.last_name
 		end
 	else
-		lastname = "-----"
+		lastname = ""
 	end
 	--info ------------------------------------------------------------------------------------------------
 	info = "#Fullname: "..string.gsub(result.print_name, "_", " ").."\n"
-	.."#Firstname: "..(result.first_name or "-----").."\n"
-	.."#Lastname: "..(result.last_name or "-----").."\n\n"
+	.."#Firstname: "..(result.first_name or "").."\n"
+	.."#Lastname: "..(result.last_name or "").."\n\n"
 	.."#Phonenumber: "..number.."\n"
-	.."#Username: Telegram.me/"..(result.username or "-----").."\n"
+	.."#Username: Telegram.me/"..(result.username or "").."\n"
 	.."#ID: "..result.id.."\n\n"
 	.."#Rank: "..usertype.."\n"
 	.."#Position: "..userrank.."\n\n"
@@ -404,7 +404,7 @@ local function run(msg, matches)
 	end
 	if matches[1] == '/infodel' and is_sudo(msg) then
 		azlemagham = io.popen('rm ./info/'..matches[2]..'.txt'):read('*all')
-		return 'Was Removed From His Rank'
+		return 'Rank Was Removed'
 	elseif matches[1] == '/info' and is_sudo(msg) then
 		local name = string.sub(matches[2], 1, 50)
 		local text = string.sub(matches[3], 1, 10000000000)
@@ -426,7 +426,7 @@ local function run(msg, matches)
 		if file ~= nil then
 			usertype = file:read("*all")
 		else
-			usertype = "-----"
+			usertype = ""
 		end
 		--hardware ------------------------------------------------------------------------------------------------
 		if matches[1] == "info" then
@@ -465,25 +465,25 @@ local function run(msg, matches)
 				numberorg = string.sub(msg.from.phone, 3)
 				number = "****0"..string.sub(numberorg, 0,6)
 				if string.sub(msg.from.phone, 0,2) == '98' then
-				number = number.."\nLocation: Iran Islamic"
+				number = number.."\n#Location: Iran Islamic"
 					if string.sub(msg.from.phone, 0,4) == '9891' then
-					number = number.."\nSimcard: Hamrahaval"
+					number = number.."\n#Simcard: Hamrahaval"
 					elseif string.sub(msg.from.phone, 0,5) == '98932' then
-					number = number.."\nSimcard: Taliya"
+					number = number.."\n#Simcard: Taliya"
 					elseif string.sub(msg.from.phone, 0,4) == '9893' then
-					number = number.."\nSimcard: MTN Irancell"
+					number = number.."\n#Simcard: MTN Irancell"
 					elseif string.sub(msg.from.phone, 0,4) == '9890' then
-					number = number.."\nSimcard: MTN Irancell"
+					number = number.."\n#Simcard: MTN Irancell"
 					elseif string.sub(msg.from.phone, 0,4) == '9892' then
-					number = number.."\nSimcard: Rightel"
+					number = number.."\n#Simcard: Rightel"
 					else
 					number = number.."\nSimcard: Other"
 					end
 				else
-				number = number.."\nLocation: Other\nSimcard: Other"
+				number = number.."\n#Location: Other\nSimcard: Other"
 				end
 			else
-				number = "-----"
+				number = ""
 			end
 			--info ------------------------------------------------------------------------------------------------
 			local info = "#Fullname: "..string.gsub(msg.from.print_name, "_", " ").."\n"
