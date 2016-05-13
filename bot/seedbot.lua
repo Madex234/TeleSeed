@@ -269,6 +269,7 @@ function create_config( )
     "Poker_Lock",
     "Qrcode",
     "Remove_Msg",
+    "Reply_Lock",
     "Search_Porn",
     "Server",
     "Set",
