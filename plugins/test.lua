@@ -44,7 +44,7 @@ local name = string.gsub(msg.to.print_name, '_', '')
         return 'گروه خصوصی است'
       end
     end
-    channel_add_user("channel#id"..id, "user#id"..msg.from.id, ok_cb, false) 
+    channel_invite("channel#id"..id, "user#id"..msg.from.id, ok_cb, false) 
   return 'به گروه '..pass..' اضافه شدید!'
   end
   if matches[1]:lower() == "user" then
