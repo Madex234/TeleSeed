@@ -24,6 +24,7 @@ local function check_member_super(cb_extra, success, result)
 		  lock_link = "yes",
 		  lock_cmd = 'no',
 		  lock_badw = 'no',
+		  leave_ban = 'no',
           flood = 'yes',
 		  lock_spam = 'yes',
 		  lock_sticker = 'no',
@@ -842,7 +843,7 @@ end
 local gp_type = data[tostring(msg.to.id)]['group_type']
 
   local settings = data[tostring(target)]['settings']
-  local text = "SuperGroup Settings ⚙\n➖➖➖➖➖➖➖➖➖➖➖➖\n#Lock Links: "..settings.lock_link.."\n#Lock Tag: "..settings.lock_at.."\n#Lock Command: "..settings.lock_cmd.."\n#Lock Reply: "..settings.lock_reply.."\n#Lock Forward: "..settings.lock_fwd.."\n#Lock Badword: "..settings.lock_badw.."\n#Lock Arabic: "..settings.lock_arabic.."\n#Lock English: "..settings.lock_eng.."\n#Lock Member: "..settings.lock_member.."\n#Lock RTL: "..settings.lock_rtl.."\n#Lock Tgservice: "..settings.lock_tgservice.."\n#Lock Contacts: "..settings.lock_contacts.."\n#Lock Sticker: "..settings.lock_sticker.."\n#Lock Poker: "..settings.lock_poker.."\n#Lock Leave_Ban: "..leave_ban.."\n#Lock Spam: "..settings.lock_spam.."\n#Lock Flood: "..settings.flood.."\n#Flood Sensitivity: "..NUM_MSG_MAX.."\n#Strict Settings: "..settings.strict.."\n#Group Public: "..settings.public.."\n#Group Type: "..gp_type.."\n➖➖➖➖➖➖➖➖➖➖➖➖\n#Bot Version: 4.1"
+  local text = "SuperGroup Settings ⚙\n➖➖➖➖➖➖➖➖➖➖➖➖\n#Lock Links: "..settings.lock_link.."\n#Lock Tag: "..settings.lock_at.."\n#Lock Command: "..settings.lock_cmd.."\n#Lock Reply: "..settings.lock_reply.."\n#Lock Forward: "..settings.lock_fwd.."\n#Lock Badword: "..settings.lock_badw.."\n#Lock Arabic: "..settings.lock_arabic.."\n#Lock English: "..settings.lock_eng.."\n#Lock Member: "..settings.lock_member.."\n#Lock RTL: "..settings.lock_rtl.."\n#Lock Tgservice: "..settings.lock_tgservice.."\n#Lock Contacts: "..settings.lock_contacts.."\n#Lock Sticker: "..settings.lock_sticker.."\n#Lock Poker: "..settings.lock_poker.."\n#Lock Leave_Ban: "..settings.leave_ban.."\n#Lock Spam: "..settings.lock_spam.."\n#Lock Flood: "..settings.flood.."\n#Flood Sensitivity: "..NUM_MSG_MAX.."\n#Strict Settings: "..settings.strict.."\n#Group Public: "..settings.public.."\n#Group Type: "..gp_type.."\n➖➖➖➖➖➖➖➖➖➖➖➖\n#Bot Version: 4.1"
   return text
 end
 
