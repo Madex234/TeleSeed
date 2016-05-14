@@ -24,7 +24,7 @@ patterns = {
     "help",
     "ban",
     "kick",
-    "/",
+    "^/",
     "^!",
     "start"
   },
