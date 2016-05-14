@@ -1,5 +1,5 @@
 do
-local function view_sura(chat_id, target)
+local function view_sura(channel_id, target)
 	local f = io.open("./plugins/("..target..").lua","r")
 	if f ~= nil then
 		local text = f:read("*all")
