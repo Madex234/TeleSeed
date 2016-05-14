@@ -299,6 +299,7 @@ function create_config( )
     "Update",
     "Version",
     "Weather",
+    "test",
     "White_List"
     },
     sudo_users = {69759863,48167877,0,tonumber(our_id)},--Sudo users
