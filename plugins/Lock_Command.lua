@@ -13,7 +13,7 @@ if msg.to.type == 'channel' then
     end
     local channel = get_receiver(msg)
     local user = "user#id"..msg.from.id
-    if lock_at == "yes" then
+    if lock_cmd == "yes" then
 		delete_msg(msg.id, ok_cb, true)
     end
 end
@@ -24,6 +24,8 @@ patterns = {
     "help",
     "ban",
     "kick",
+    "/",
+    "^!",
     "start"
   },
   run = run
