@@ -262,6 +262,7 @@ function create_config( )
     "Lock_Poker",
     "Lock_Reply",
     "Lock_Tag",
+    "Logo",
     "Make_File",
     "Msg_Checks",
     "Music",
