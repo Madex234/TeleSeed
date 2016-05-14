@@ -1,70 +1,44 @@
 do
-
+local TIME_CHECK = 60
+local function pre_process(msg)
+  local hash = 'per_sec'
+  local get = tonumber(redis:get(hash) or 0)
+  redis:setex(hash, TIME_CHECK, get)
+  return msg
+end
 local function run(msg, matches)
-  local id = msg.to.id
-if matches[1]:lower() == "gplist" then
-local text = 'لیست گروه هایی که میتوانید در آنها عضو شوید : \n'
-local name = redis:hkeys("passes")
-for i=1,#name do
-text = text..i..'- '..name[i]..'\n'
-end
-return text
-end
-  if matches[1]:lower() == "/user" and msg.to.type == "channel" and matches[2] and is_owner(msg) then
-    local pass = matches[2]:lower()
-    if redis:hget('passes',pass) then
-      return "یوزر "..matches[2].."برای این گروه تنظیم شد\nاز این به  بعد کاربران میتوانند با ارسال دستور زیر وارد گروه شوند \njoin "..matches[2]
+  if matches[1] == "me" then
+    if msg.to.type == "user" then
+      return msg
     end
-local nowpass = redis:hget('setpass',msg.to.id)
-if nowpass then
-redis:hdel('passes',nowpass)
-end
-redis:hset('setpass',msg.to.id,pass)
-redis:hset('passes',pass,msg.to.id)
-local name = string.gsub(msg.to.print_name, '_', '')
-     send_large_msg("channel#id"..msg.to.id, "یوزر "..matches[2].." برای این گروه تنظیم شد\nاز این به  بعد کاربران میتوانند با ارسال دستور زیر وارد گروه شوند \njoin "..matches[2], ok_cb, true)
-    return
+    local hash = 'msgs:'..msg.from.id..':'..msg.to.id
+	local msgsend = redis:get(hash)
+	local r = tonumber(redis:get('cis_msg:'..msg.to.id))
+	local t = r * 100
+	local percent = math.floor((msgsend) / r * 100)
+	return reply_msg(msg.id, msg.from.print_name.." You've sent "..msgsend.."("..percent.."%) and this group has "..r.." messages", ok_cb, true)
   end
-  if matches[1]:lower() == "join" and matches[2] then
-    local hash = 'passes'
-    local pass = matches[2]:lower()
-    id = redis:hget(hash, pass)
-    local receiver = get_receiver(msg)
-    if not id then
-      return "گروهی با این یوزر وجود ندارد"
-    end
-  if data[tostring(id)] then
-  if is_banned(msg.from.id, id) then
-      return 'شما از این گروه بن هستید'
-   end
-      if is_gbanned(msg.from.id) then
-            return 'شما سوپر بن هستید'
-      end
-      if data[tostring(id)]['settings']['lock_member'] == 'yes' and not is_owner2(msg.from.id, id) then
-        return 'گروه خصوصی است'
-      end
-    end
-    channel_invite("channel#id"..id, "user#id"..msg.from.id, ok_cb, false) 
-  return 'به گروه '..pass..' اضافه شدید!'
+  if matches[1] == "botload" and is_admin(msg) then
+    local hash = 'total:msg'
+    local get = tonumber(redis:get(hash))
+    local per_sec = tonumber(redis:get('per_sec'))
+    return per_sec.." msgs/s\n"..get.." Message since last restart"
   end
-  if matches[1]:lower() == "user" then
-if not msg.to.type == 'channel' then
-return 'فقط در گروه ها'
-end
-   local hash = 'setpass'
-   local pass = redis:hget(hash,msg.to.id)
-   local receiver = get_receiver(msg)
-   send_large_msg(receiver, "یوزر گروه [ "..msg.to.print_name.." ] :\n\n > "..pass)
- end
+  if matches[1] == "restart" and is_sudo(msg) then
+    local hash = 'total:msg'
+    redis:del(hash)
+    return "See ya later =)"
+  end 
 end
 
 return {
   patterns = {
-    "^(/[Uu]ser) (.*)$",
-    "^([Uu]ser)$",
-    "^([Gg]plist)$",
-    "^([Jj]oin) (.*)$",
+    "^[/!#](me)$",
+    "^[/!#](botload)$",
+    "^[/!#](restart)$",
   },
-  run = run
+  run = run,
+  pre_process = pre_process
 }
+
 end
