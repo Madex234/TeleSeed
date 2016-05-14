@@ -1,3 +1,4 @@
+do
 local function run(msg, matches)
     local receiver = get_receiver(msg)
     local site = matches[2]
