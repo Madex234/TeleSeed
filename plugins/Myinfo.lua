@@ -3,19 +3,19 @@ local function callback_reply(extra, success, result)
 	userrank = "Member"
 	if tonumber(result.from.id) == 48167877 then
 		userrank = "Master ⭐⭐⭐⭐"
-		send_document(org_channel_id,"umbrella/stickers/master.webp", ok_cb, false)
+		send_document(org_channel_id,"data/sticker/Master.webp", ok_cb, false)
 	elseif is_sudo(result) then
 		userrank = "Sudo ⭐⭐⭐⭐⭐"
-		send_document(org_channel_id,"umbrella/stickers/sudo.webp", ok_cb, false)
+		send_document(org_channel_id,"data/sticker/Sudo.webp", ok_cb, false)
 	elseif is_admin1(result.from.id) then
 		userrank = "Admin ⭐⭐⭐"
-		send_document(org_channel_id,"umbrella/stickers/admin.webp", ok_cb, false)
+		send_document(org_channel_id,"data/sticker/Admin.webp", ok_cb, false)
 	elseif is_owner2(result.from.id, result.to.id) then
 		userrank = "Owner ⭐⭐"
-		send_document(org_channel_id,"umbrella/stickers/leader.webp", ok_cb, false)
+		send_document(org_channel_id,"data/sticker/Leader.webp", ok_cb, false)
 	elseif is_momod2(result.from.id, result.to.id) then
 		userrank = "Moderator ⭐"
-		send_document(org_channel_id,"umbrella/stickers/mod.webp", ok_cb, false)
+		send_document(org_channel_id,"data/sticker/Moderator.webp", ok_cb, false)
 	elseif tonumber(result.from.id) == tonumber(our_id) then
 		userrank = "TeleGuard ⭐⭐⭐⭐⭐⭐"
 		send_document(org_channel_id,"umbrella/stickers/umb.webp", ok_cb, false)
@@ -176,19 +176,19 @@ local function callback_res(extra, success, result)
 	--icon & rank ------------------------------------------------------------------------------------------------
 	if tonumber(result.id) == 48167877 then
 		userrank = "Master ⭐⭐⭐⭐"
-		send_document(org_channel_id,"umbrella/stickers/master.webp", ok_cb, false)
+		send_document(org_channel_id,"data/sticker/Master.webp", ok_cb, false)
 	elseif is_sudo(result) then
 		userrank = "Sudo ⭐⭐⭐⭐⭐"
-		send_document(org_channel_id,"umbrella/stickers/sudo.webp", ok_cb, false)
+		send_document(org_channel_id,"data/sticker/Sudo.webp", ok_cb, false)
 	elseif is_admin1(result.id) then
 		userrank = "Admin ⭐⭐⭐"
-		send_document(org_channel_id,"umbrella/stickers/admin.webp", ok_cb, false)
+		send_document(org_channel_id,"data/sticker/Admin.webp", ok_cb, false)
 	elseif is_owner2(result.id, extra.channel2) then
 		userrank = "Owner ⭐⭐"
-		send_document(org_channel_id,"umbrella/stickers/leader.webp", ok_cb, false)
+		send_document(org_channel_id,"data/sticker/Leader.webp", ok_cb, false)
 	elseif is_momod2(result.id, extra.channel2) then
 		userrank = "Moderator ⭐"
-		send_document(org_channel_id,"umbrella/stickers/mod.webp", ok_cb, false)
+		send_document(org_channel_id,"data/sticker/Moderator.webp", ok_cb, false)
 	elseif tonumber(result.id) == tonumber(our_id) then
 		userrank = "TeleGuard ⭐⭐⭐⭐⭐⭐"
 		send_document(org_channel_id,"umbrella/stickers/umb.webp", ok_cb, false)
@@ -275,19 +275,19 @@ local function callback_info(extra, success, result)
 	--icon & rank ------------------------------------------------------------------------------------------------
 	if tonumber(result.id) == 48167877 then
 		userrank = "Master ⭐⭐⭐⭐"
-		send_document(org_channel_id,"umbrella/stickers/master.webp", ok_cb, false)
+		send_document(org_channel_id,"data/sticker/Master.webp", ok_cb, false)
 	elseif is_sudo(result) then
 		userrank = "Sudo ⭐⭐⭐⭐⭐"
-		send_document(org_channel_id,"umbrella/stickers/sudo.webp", ok_cb, false)
+		send_document(org_channel_id,"data/sticker/Sudo.webp", ok_cb, false)
 	elseif is_admin1(result.id) then
 		userrank = "Admin ⭐⭐⭐"
-		send_document(org_channel_id,"umbrella/stickers/admin.webp", ok_cb, false)
+		send_document(org_channel_id,"data/sticker/Admin.webp", ok_cb, false)
 	elseif is_owner2(result.id, extra.channel2) then
 		userrank = "Owner ⭐⭐"
-		send_document(org_channel_id,"umbrella/stickers/leader.webp", ok_cb, false)
+		send_document(org_channel_id,"data/sticker/Leader.webp", ok_cb, false)
 	elseif is_momod2(result.id, extra.channel2) then
 		userrank = "Moderator ⭐"
-		send_document(org_channel_id,"umbrella/stickers/mod.webp", ok_cb, false)
+		send_document(org_channel_id,"data/sticker/Moderator.webp", ok_cb, false)
 	elseif tonumber(result.id) == tonumber(our_id) then
 		userrank = "TeleGuard ⭐⭐⭐⭐⭐⭐"
 		send_document(org_channel_id,"umbrella/stickers/umb.webp", ok_cb, false)
@@ -441,19 +441,19 @@ local function run(msg, matches)
 			--icon & rank ------------------------------------------------------------------------------------------------
 			if tonumber(msg.from.id) == 48167877 then
 				userrank = "Master ⭐⭐⭐⭐"
-				send_document("channel#id"..msg.to.id,"umbrella/stickers/master.webp", ok_cb, false)
+		send_document(org_channel_id,"data/sticker/Master.webp", ok_cb, false)
 			elseif is_sudo(msg) then
 				userrank = "Sudo ⭐⭐⭐⭐⭐"
-				send_document("channel#id"..msg.to.id,"umbrella/stickers/sudo.webp", ok_cb, false)
+		send_document(org_channel_id,"data/sticker/Sudo.webp", ok_cb, false)
 			elseif is_admin1(msg) then
 				userrank = "Admin ⭐⭐⭐"
-				send_document("channel#id"..msg.to.id,"umbrella/stickers/admin.webp", ok_cb, false)
+		send_document(org_channel_id,"data/sticker/Admin.webp", ok_cb, false)
 			elseif is_owner(msg) then
 				userrank = "Owner ⭐⭐"
-				send_document("channel#id"..msg.to.id,"umbrella/stickers/leader.webp", ok_cb, false)
+		send_document(org_channel_id,"data/sticker/Leader.webp", ok_cb, false)
 			elseif is_momod(msg) then
 				userrank = "Moderator ⭐"
-				send_document("channel#id"..msg.to.id,"umbrella/stickers/mod.webp", ok_cb, false)
+		send_document(org_channel_id,"data/sticker/Moderator.webp", ok_cb, false)
 			else
 				userrank = "Member"
 			end
