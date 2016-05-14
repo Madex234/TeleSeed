@@ -263,6 +263,7 @@ function create_config( )
     "Lock_Reply",
     "Lock_Tag",
     "Logo",
+    "Logo_Black",
     "Make_File",
     "Msg_Checks",
     "Music",
