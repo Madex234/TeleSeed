@@ -2,7 +2,7 @@ local function nuditycheck(msg, success, result)
   if success then
 local file = 'data/nudity/'..string.sub(result, 38)
 os.rename(result, file)
-  local curl = 'curl -X POST "https://api.sightengine.com/1.0/nudity.json" -F "api_user=nil" -F "api_secret=nil" -F "photo=@'..file..'"'
+  local curl = 'curl -X POST "https://api.sightengine.com/1.0/nudity.json" -F "api_user=280540109" -F "api_secret=S3F9MgjKQNQ2P5YV" -F "photo=@'..file..'"'
   local jcmd = io.popen(curl)
   
   local res = jcmd:read('*all')
@@ -12,9 +12,9 @@ if jdat.status then
 	     send_large_msg(get_receiver(msg), jdat.error_message, ok_cb, false)
           elseif jdat.status == 'success' then
              if jdat.nudity.result then
-	     send_large_msg(get_receiver(msg), 'این یک تصویر پورن است', ok_cb, false)
+	     send_large_msg(get_receiver(msg), 'This is a porn picture', ok_cb, false)
          else
-         send_large_msg(get_receiver(msg), 'این یک تصویر سادست', ok_cb, false)
+         send_large_msg(get_receiver(msg), '', ok_cb, false)
          end
   end
 end
