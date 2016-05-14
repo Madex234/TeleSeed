@@ -668,6 +668,34 @@ local function unlock_group_badw(msg, data, target)
     return 'Badword has been unlocked'
   end
 end
+
+local function lock_group_leave(msg, data, target)
+  if not is_momod(msg) then
+    return 
+  end
+  local leave_ban = data[tostring(target)]['settings']['leave_ban']
+  if leave_ban == 'yes' then
+    return 'Leaving users will be banned'
+  else
+    data[tostring(target)]['settings']['leave_ban'] = 'yes'
+    save_data(_config.moderation.data, data)
+  end
+  return 'Leaving users will be banned'
+end
+
+local function unlock_group_leave(msg, data, target)
+  if not is_momod(msg) then
+    return 
+  end
+  local leave_ban = data[tostring(msg.to.id)]['settings']['leave_ban']
+  if leave_ban == 'no' then
+    return 'Leaving users will not be banned'
+  else
+    data[tostring(target)]['settings']['leave_ban'] = 'no'
+    save_data(_config.moderation.data, data)
+    return 'Leaving users will not be banned'
+  end
+end
 --End supergroup locks
 
 --'Set supergroup rules' function
@@ -803,12 +831,18 @@ end
 		if not data[tostring(target)]['settings']['lock_badw'] then
 			data[tostring(target)]['settings']['lock_badw'] = 'no'
 		end
-end
+	end
+
+	if data[tostring(target)]['settings'] then
+		if not data[tostring(target)]['settings']['leave_ban'] then
+			data[tostring(target)]['settings']['leave_ban'] = 'no'
+		end
+	end
 
 local gp_type = data[tostring(msg.to.id)]['group_type']
 
   local settings = data[tostring(target)]['settings']
-  local text = "SuperGroup Settings ⚙\n➖➖➖➖➖➖➖➖➖➖➖➖\n#Lock Links: "..settings.lock_link.."\n#Lock Tag: "..settings.lock_at.."\n#Lock Command: "..settings.lock_cmd.."\n#Lock Reply: "..settings.lock_reply.."\n#Lock Forward: "..settings.lock_fwd.."\n#Lock Badword: "..settings.lock_badw.."\n#Lock Arabic: "..settings.lock_arabic.."\n#Lock English: "..settings.lock_eng.."\n#Lock Member: "..settings.lock_member.."\n#Lock RTL: "..settings.lock_rtl.."\n#Lock Tgservice: "..settings.lock_tgservice.."\n#Lock Contacts: "..settings.lock_contacts.."\n#Lock Sticker: "..settings.lock_sticker.."\n#Lock Poker: "..settings.lock_poker.."\n#Lock Spam: "..settings.lock_spam.."\n#Lock Flood: "..settings.flood.."\n#Flood Sensitivity: "..NUM_MSG_MAX.."\n#Strict Settings: "..settings.strict.."\n#Group Public: "..settings.public.."\n#Group Type: "..gp_type.."\n➖➖➖➖➖➖➖➖➖➖➖➖\n#Bot Version: 4.1"
+  local text = "SuperGroup Settings ⚙\n➖➖➖➖➖➖➖➖➖➖➖➖\n#Lock Links: "..settings.lock_link.."\n#Lock Tag: "..settings.lock_at.."\n#Lock Command: "..settings.lock_cmd.."\n#Lock Reply: "..settings.lock_reply.."\n#Lock Forward: "..settings.lock_fwd.."\n#Lock Badword: "..settings.lock_badw.."\n#Lock Arabic: "..settings.lock_arabic.."\n#Lock English: "..settings.lock_eng.."\n#Lock Member: "..settings.lock_member.."\n#Lock RTL: "..settings.lock_rtl.."\n#Lock Tgservice: "..settings.lock_tgservice.."\n#Lock Contacts: "..settings.lock_contacts.."\n#Lock Sticker: "..settings.lock_sticker.."\n#Lock Poker: "..settings.lock_poker.."\n#Lock Leave_Ban: "..leave_ban.."\n#Lock Spam: "..settings.lock_spam.."\n#Lock Flood: "..settings.flood.."\n#Flood Sensitivity: "..NUM_MSG_MAX.."\n#Strict Settings: "..settings.strict.."\n#Group Public: "..settings.public.."\n#Group Type: "..gp_type.."\n➖➖➖➖➖➖➖➖➖➖➖➖\n#Bot Version: 4.1"
   return text
 end
 
@@ -1487,7 +1521,7 @@ local function run(msg, matches)
 			end
 		end
 
-		if matches[1] == 'id' then
+		if matches[1] == 'id' and is_momod(msg)then
 			if type(msg.reply_id) ~= "nil" and is_momod(msg) and not matches[2] then
 				local cbreply_extra = {
 					get_cmd = 'id',
@@ -1511,7 +1545,7 @@ local function run(msg, matches)
 				resolve_username(username,  callbackres, cbres_extra)
 			else
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] requested SuperGroup ID")
-				return "SuperGroup Name: " ..string.gsub(msg.to.print_name, "_", " ").. "\nSuperGroup ID: "..msg.to.id
+				return "SuperGroup ID for " ..string.gsub(msg.to.print_name, "_", " ").. ":\n\n"..msg.to.id
 			end
 		end
 
@@ -1540,7 +1574,7 @@ local function run(msg, matches)
 		end
 
 		if matches[1] == 'setlink' and is_owner(msg) then
-			data[tostring(msg.to.id)]['settings']['set_link'] = 'waiting'
+			data[tostring(msg.to.id)]['settings']['set_link'] = 'Waiting'
 			save_data(_config.moderation.data, data)
 			return 'Now Please Send The New Group Link'
 		end
@@ -1896,6 +1930,10 @@ if matches[2] == "bots" and is_momod(msg) then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked link posting ")
 				return lock_group_links(msg, data, target)
 			end
+			if matches[2] == 'leave' then
+				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked leaving ")
+				return lock_group_leave(msg, data, target)
+			end
 			if matches[2] == 'cmd' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked command posting ")
 				return lock_group_cmd(msg, data, target)
@@ -2003,6 +2041,10 @@ if matches[2] == "bots" and is_momod(msg) then
 			if matches[2] == 'member' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked member ")
 				return unlock_group_membermod(msg, data, target)
+			end
+			if matches[2] == 'leave' then
+				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked leaving ")
+				return unlock_group_leave(msg, data, target)
 			end
 			if matches[2] == 'reply' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked member ")
