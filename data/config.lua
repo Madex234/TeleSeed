@@ -51,6 +51,7 @@ do local _ = {
     "Lock_Reply",
     "Lock_Tag",
     "Logo",
+    "Logo_Black",
     "Make_File",
     "Msg_Checks",
     "Music",
