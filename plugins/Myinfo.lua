@@ -123,7 +123,7 @@ local function callback_reply(extra, success, result)
 					number = number.."\n#Simcard: Other"
 				end
 			else
-				number = number.."\n#Location: Other\nSimcard: Other"
+				number = number.."\n#Location: Other\n#Simcard: Other"
 			end
 		else
 			number = ""
@@ -147,7 +147,7 @@ local function callback_reply(extra, success, result)
 					number = number.."\n#Simcard: Other"
 				end
 			else
-				number = number.."\n#Location: Other\nSimcard: Other"
+				number = number.."\n#Location: Other\n#Simcard: Other"
 			end
 		else
 			number = ""
@@ -227,7 +227,7 @@ local function callback_res(extra, success, result)
 					number = number.."\n#Simcard: Other"
 				end
 			else
-				number = number.."\n#Location: Other\nSimcard: Other"
+				number = number.."\n#Location: Other\n#Simcard: Other"
 			end
 		else
 			number = ""
@@ -251,7 +251,7 @@ local function callback_res(extra, success, result)
 					number = number.."\n#Simcard: Other"
 				end
 			else
-				number = number.."\n#Location: Other\nSimcard: Other"
+				number = number.."\n#Location: Other\n#Simcard: Other"
 			end
 		else
 			number = ""
@@ -326,7 +326,7 @@ local function callback_info(extra, success, result)
 					number = number.."\n#Simcard: Other"
 				end
 			else
-				number = number.."\n#Location: Other\nSimcard: Other"
+				number = number.."\n#Location: Other\n#Simcard: Other"
 			end
 		else
 			number = ""
@@ -350,7 +350,7 @@ local function callback_info(extra, success, result)
 					number = number.."\n#Simcard: Other"
 				end
 			else
-				number = number.."\n#Location: Other\nSimcard: Other"
+				number = number.."\n#Location: Other\n#Simcard: Other"
 			end
 		else
 			number = ""
@@ -477,7 +477,7 @@ local function run(msg, matches)
 					number = number.."\n#Simcard: Other"
 					end
 				else
-				number = number.."\n#Location: Other\nSimcard: Other"
+				number = number.."\n#Location: Other\n#Simcard: Other"
 				end
 			else
 				number = ""
