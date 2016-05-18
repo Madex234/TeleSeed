@@ -15,6 +15,7 @@ do local _ = {
     "ClashofClans",
     "Connect_Server",
     "Date",
+    "Delete_Banlist",
     "Delete_Plugin",
     "Dogify",
     "Expand",
