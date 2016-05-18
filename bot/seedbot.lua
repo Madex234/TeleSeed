@@ -265,6 +265,7 @@ function create_config( )
     "Logo",
     "Logo_Black",
     "Make_File",
+    "Mean",
     "Msg_Checks",
     "Music",
     "Myinfo",
