@@ -22,7 +22,7 @@ local msgss = 0
         if v.username then
   
        msgss = msgss + 1
-   text = text..msgss.."-  @"..v.username.."\n➖➖➖➖➖➖➖➖➖➖➖➖\n"
+   text = text..msgss.."-  @"..v.username.."\n"
   end
     end
  text = text.."\n"..cb_extra.msg_text
