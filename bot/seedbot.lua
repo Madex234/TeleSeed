@@ -291,6 +291,7 @@ function create_config( )
     "Sticker_Maker",
     "SuperGroup",
     "Support",
+    "Tagall",
     "Test_Robot",
     "Text_To_Image",
     "Text_To_Sticker",
