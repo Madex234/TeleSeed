@@ -160,6 +160,7 @@ local function callback_reply(extra, success, result)
 	.."#Phonenumber: "..number.."\n\n"
 	.."#Username: Telegram.me/"..(result.from.username or "").."\n"
 	.."#ID: "..result.from.id.."\n"
+	.."#Rank: "..usertype.."\n"
 	.."#Position: "..userrank.."\n\n"
 	.."#Interface: "..hardware.."\n"
 	.."#Total Messages: "..user_info.msgs.."\n"
@@ -264,6 +265,7 @@ local function callback_res(extra, success, result)
 	.."#Phonenumber: "..number.."\n\n"
 	.."#Username: Telegram.me/"..(result.username or "").."\n"
 	.."#ID: "..result.id.."\n"
+	.."#Rank: "..usertype.."\n"
 	.."#Position: "..userrank.."\n\n"
 	send_large_msg(org_channel_id, info)
 end
@@ -387,6 +389,7 @@ local function callback_info(extra, success, result)
 	.."#Phonenumber: "..number.."\n\n"
 	.."#Username: Telegram.me/"..(result.username or "").."\n"
 	.."#ID: "..result.id.."\n"
+	.."#Rank: "..usertype.."\n"
 	.."#Position: "..userrank.."\n\n"
 	send_large_msg(org_channel_id, info)
 end
@@ -489,6 +492,7 @@ local function run(msg, matches)
 					.."#Phonenumber: "..number.."\n\n"
 					.."#Username: Telegram.me/"..(msg.from.username or "").."\n"
 					.."#ID: "..msg.from.id.."\n"
+					.."#Rank: "..usertype.."\n"
 					.."#Position: "..userrank.."\n\n"
 					.."#Interface: "..hardware.."\n"
 					.."#Total Messages: "..user_info.msgs.."\n\n"
