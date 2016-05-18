@@ -22,10 +22,11 @@ local msgss = 0
         if v.username then
   
        msgss = msgss + 1
-   text = text..msgss.."-  @"..v.username.."\n"
+   text = text..msgss.."-  @"..v.username.."\n➖➖➖➖➖➖➖➖➖➖➖➖\n"
   end
     end
- text = text.."➖➖➖➖➖➖➖➖➖➖➖➖\n"..cb_extra.msg_text
+ text = text.."\n"..cb_extra.msg_text
+ 
  send_large_msg(receiver, text)
 end
 local function run(msg, matches)
