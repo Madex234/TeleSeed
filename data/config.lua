@@ -25,7 +25,6 @@ do local _ = {
     "Feedback",
     "Filemanager",
     "Filterlist",
-    "Get",
     "Get_Plugin",
     "Get_File",
     "Get_Welcome",
