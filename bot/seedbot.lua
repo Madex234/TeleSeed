@@ -237,7 +237,6 @@ function create_config( )
     "Feedback",
     "Filemanager",
     "Filterlist",
-    "Get",
     "Get_Plugin",
     "Get_File",
     "Get_Welcome",
