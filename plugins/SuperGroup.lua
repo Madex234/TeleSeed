@@ -1557,7 +1557,7 @@ local function run(msg, matches)
 			end
 		end
 
-		if matches[1] == 'id' then
+		if matches[1] == 'id' and is_owner then
 			if type(msg.reply_id) ~= "nil" and is_momod(msg) and not matches[2] then
 				local cbreply_extra = {
 					get_cmd = 'id',
@@ -1581,7 +1581,7 @@ local function run(msg, matches)
 				resolve_username(username,  callbackres, cbres_extra)
 			else
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] requested SuperGroup ID")
-				local text = "SuperGroup ID" ..string.gsub(msg.to.print_name, "_", " ").. ":\n"..msg.to.id
+				local text = "SuperGroup ID:\n"..msg.to.id
 				      return reply_msg(msg.id, text, ok_cb, false)
 				      end
 		end
