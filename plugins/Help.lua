@@ -1,7 +1,7 @@
 do
 
 local function run(msg, matches)
-  if matches[1]:lower() == 'help' then
+  if matches[1]:lower() == 'help' and is_owner then
       return [[راهنمای ربات TeleGuard:
 ➖➖➖➖➖➖➖➖➖➖➖➖
 1. تمامی دستورات با # , / , ! می باشد.
