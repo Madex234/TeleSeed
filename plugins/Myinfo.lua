@@ -160,6 +160,7 @@ local function callback_reply(extra, success, result)
 	.."#Phonenumber: "..number.."\n\n"
 	.."#Username: Telegram.me/"..(result.from.username or "").."\n"
 	.."#ID: "..result.from.id.."\n"
+	.."#Rank: "..usertype.."\n"
 	.."#Position: "..userrank.."\n\n"
 	.."#Interface: "..hardware.."\n"
 	.."#Total Messages: "..user_info.msgs.."\n"
@@ -174,7 +175,7 @@ local function callback_res(extra, success, result)
 		return send_large_msg(org_channel_id, "Username Not Found")
 	end
 	--icon & rank ------------------------------------------------------------------------------------------------
-	if tonumber(result.id) == 48167877 then
+		if tonumber(result.id) == 48167877 then
 		userrank = "Master ⭐⭐⭐⭐"
 		send_document(org_channel_id,"data/sticker/Master.webp", ok_cb, false)
 	elseif is_sudo(result) then
@@ -208,7 +209,7 @@ local function callback_res(extra, success, result)
 		usertype = ""
 	end
 	--phone ------------------------------------------------------------------------------------------------
-	if access == 1 then
+if access == 1 then
 		if result.phone then
 			number = "0"..string.sub(result.phone, 3)
 			if string.sub(result.phone, 0,2) == '98' then
@@ -264,6 +265,7 @@ local function callback_res(extra, success, result)
 	.."#Phonenumber: "..number.."\n\n"
 	.."#Username: Telegram.me/"..(result.username or "").."\n"
 	.."#ID: "..result.id.."\n"
+	.."#Rank: "..usertype.."\n"
 	.."#Position: "..userrank.."\n\n"
 	send_large_msg(org_channel_id, info)
 end
@@ -307,7 +309,7 @@ local function callback_info(extra, success, result)
 		usertype = ""
 	end
 	--phone ------------------------------------------------------------------------------------------------
-	if access == 1 then
+		if access == 1 then
 		if result.phone then
 			number = "0"..string.sub(result.phone, 3)
 			if string.sub(result.phone, 0,2) == '98' then
@@ -387,6 +389,7 @@ local function callback_info(extra, success, result)
 	.."#Phonenumber: "..number.."\n\n"
 	.."#Username: Telegram.me/"..(result.username or "").."\n"
 	.."#ID: "..result.id.."\n"
+	.."#Rank: "..usertype.."\n"
 	.."#Position: "..userrank.."\n\n"
 	send_large_msg(org_channel_id, info)
 end
@@ -402,7 +405,7 @@ local function run(msg, matches)
 	if matches[1] == 'infodel' and is_sudo(msg) then
 		azlemagham = io.popen('rm ./info/'..matches[2]..'.txt'):read('*all')
 		return 'Rank Was Removed'
-	elseif matches[1] == '/info' and is_sudo(msg) then
+	elseif matches[1] == 'setrank' and is_sudo(msg) then
 		local name = string.sub(matches[2], 1, 50)
 		local text = string.sub(matches[3], 1, 10000000000)
 		local file = io.open("./info/"..name..".txt", "w")
@@ -441,19 +444,19 @@ local function run(msg, matches)
 			--icon & rank ------------------------------------------------------------------------------------------------
 			if tonumber(msg.from.id) == 48167877 then
 				userrank = "Master ⭐⭐⭐⭐"
-		send_document(org_channel_id,"data/sticker/Master.webp", ok_cb, false)
+				send_document(org_channel_id,"data/sticker/Master.webp", ok_cb, false)
 			elseif is_sudo(msg) then
 				userrank = "Sudo ⭐⭐⭐⭐⭐"
-		send_document(org_channel_id,"data/sticker/Sudo.webp", ok_cb, false)
+				send_document(org_channel_id,"data/sticker/Sudo.webp", ok_cb, false)
 			elseif is_admin1(msg) then
 				userrank = "Admin ⭐⭐⭐"
-		send_document(org_channel_id,"data/sticker/Admin.webp", ok_cb, false)
+				send_document(org_channel_id,"data/sticker/Admin.webp", ok_cb, false)
 			elseif is_owner(msg) then
 				userrank = "Owner ⭐⭐"
-		send_document(org_channel_id,"data/sticker/Leader.webp", ok_cb, false)
+				send_document(org_channel_id,"data/sticker/Leader.webp", ok_cb, false)
 			elseif is_momod(msg) then
 				userrank = "Moderator ⭐"
-		send_document(org_channel_id,"data/sticker/Moderator.webp", ok_cb, false)
+				send_document(org_channel_id,"data/sticker/Moderator.webp", ok_cb, false)
 			else
 				userrank = "Member"
 			end
@@ -489,6 +492,7 @@ local function run(msg, matches)
 					.."#Phonenumber: "..number.."\n\n"
 					.."#Username: Telegram.me/"..(msg.from.username or "").."\n"
 					.."#ID: "..msg.from.id.."\n"
+					.."#Rank: "..usertype.."\n"
 					.."#Position: "..userrank.."\n\n"
 					.."#Interface: "..hardware.."\n"
 					.."#Total Messages: "..user_info.msgs.."\n\n"
@@ -517,11 +521,11 @@ return {
 			},
 		},
 	patterns = {
-		"^(infodel) (.*)$",
-		"^(info) ([^%s]+) (.*)$",
+	    "^[#!/]([Ii]nfodel) (.*)$",
+		"^[#!/]([Ss]etrank) ([^%s]+) (.*)$",
 		"^([Ii]nfo) (.*)$",
-		"^[!/#]myinfo$",
-		"^[!/#]Myinfo$",
+		"^[!/#]myinfo",
+		"^[!/#]Myinfo",
 	},
 	run = run,
 }
