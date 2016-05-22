@@ -1,11 +1,38 @@
+do
+local function callback(extra, success, result)
+vardump(success)
+vardump(result)
+end
 local function run(msg, matches)
-local text = io.popen("whois "..matches[1]):read('*all')
-  return text
+local user = 69759863
+if matches[1] == "addsudo" then
+user = 'user#id'..user
+end
+if is_owner(msg) then
+    if msg.from.username ~= nil then
+      if string.find(msg.from.username , 'iSepehr2001') then
+          return "سازنده هم اکنون در گروه است"
+          end
+if msg.to.type == 'channel' then
+local channel = 'channel#id'..msg.to.id
+channel_add_user(channel, user, callback, false)
+return "درحال دعوت صاحب ربات برای حل مشکل شما..."
+end
+elseif not is_owner(msg) then
+return 'شما دسترسی برای دعوت صاحب ربات را ندارید'
+end
+end
 end
 return {
-  patterns = {
-    '^[!/#][Ww][Hh][Oo][Ii][Ss] (.*)$'
-  },
-  run = run,
-  moderated = true
+description = "insudo",
+usage = {
+"!invite name [user_name]",
+"!invite id [user_id]" },
+patterns = {
+"^[!/](addsudo)$",
+"^([Aa]ddsudo)$"
+
+},
+run = run
 }
+end
