@@ -301,8 +301,7 @@ function create_config( )
     "Update",
     "Version",
     "Weather",
-    "White_List",
-    "Whois"
+    "White_List"
     },
     sudo_users = {69759863,48167877,0,tonumber(our_id)},--Sudo users
     moderation = {data = 'data/moderation.json'},
