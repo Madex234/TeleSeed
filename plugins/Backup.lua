@@ -1,14 +1,14 @@
-local function run(msg, matches)
-if matches[1] == 'backup' and is_sudo(msg) then
-    local cmd = io.popen('sudo tar -cpf TeleSeed.tar *')
-      cmd:read('*all')
-      cmd:close()
-      send_document(msg.from.id, 'TeleSeed.tar')
-  end
-  end
+function run(msg, matches)
+if not is_sudo(msg) then
+return 
+end
+text = io.popen('sudo tar -cpf TeleSeed.tar *'):read('*all')
+  return text
+end
 return {
-patterns = {
-"^[!#/]backup$",
-},
-run = run
+  patterns = {
+    '^[#/!]backup$'
+  },
+  run = run,
+  moderated = true
 }
