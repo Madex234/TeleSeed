@@ -7,7 +7,7 @@ if matches[1] == 'backup' and is_sudo(msg) then
       end
 return {
 patterns = {
-“^[!#/]backup$",
+"^[!#/]backup$",
 },
 run = run
 }
