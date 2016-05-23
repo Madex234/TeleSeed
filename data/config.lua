@@ -7,7 +7,6 @@ do local _ = {
     "Aparat",
     "Arz",
     "Azan",
-    "Backup",
     "Banhammer",
     "Banner",
     "Broadcast",
