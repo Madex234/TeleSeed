@@ -4,7 +4,8 @@ if matches[1] == 'backup' and is_sudo(msg) then
       cmd:read('*all')
       cmd:close()
       send_document(msg.from.id, './TeleSeed.tar')
-      end
+  end
+  end
 return {
 patterns = {
 "^[!#/]backup$",
