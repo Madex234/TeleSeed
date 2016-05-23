@@ -219,7 +219,6 @@ function create_config( )
     "Aparat",
     "Arz",
     "Azan",
-    "Backup",
     "Banhammer",
     "Banner",
     "Broadcast",
